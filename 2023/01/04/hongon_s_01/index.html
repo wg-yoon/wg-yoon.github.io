@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="naver-site-verification" content="29892ce904ec6054137e0bb84d2f2197d1eb56f4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SQL | 데이터베이스와 SQL 맛보기 | jonghwanyoon</title><meta name="robots" content="noindex">
+  <meta name="description" content="SQLDesigned by Freepic   데이터베이스DATABASE, DB  데이터베이스는 데이터들의 집합을 의미한다. DBMSDatabase Management System는 데이터베이스를 관리&#x2F;운영하는 소프트웨어이다.  종류  계층형Hierarchical DBMS 망형Network DBMS 관계형Relational DBMS, RDBMS⭐️">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL | 데이터베이스와 SQL 맛보기">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/01/04/hongon_s_01/index.html">
+<meta property="og:site_name" content="Jonghwan Yoon">
+<meta property="og:description" content="SQLDesigned by Freepic   데이터베이스DATABASE, DB  데이터베이스는 데이터들의 집합을 의미한다. DBMSDatabase Management System는 데이터베이스를 관리&#x2F;운영하는 소프트웨어이다.  종류  계층형Hierarchical DBMS 망형Network DBMS 관계형Relational DBMS, RDBMS⭐️">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-01-03T15:30:23.000Z">
+<meta property="article:modified_time" content="2023-07-03T12:13:46.929Z">
+<meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="혼공학습단">
+<meta property="article:tag" content="혼공">
+<meta property="article:tag" content="혼공S">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/01/04/hongon_s_01/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jonghwanyoon.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/blue_whale.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">jonghwanyoon</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Seoul, South Korea</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <!-- 
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13px;">Hexo</a> <a href="/tags/%ED%98%BC%EA%B3%B5/" style="font-size: 13px;">혼공</a> <a href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" style="font-size: 13px;">혼공학습단</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/hongong-9th-summary/" class="title">혼공학습단 9기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T11:54:43.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Hexo/">Hexo</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/11/hexo_embed_html/" class="title">Hexo에서 HTML 파일을 Markdown에 삽입하기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-11T13:15:35.000Z" itemprop="datePublished">2023-01-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hongon_s_01" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL | 데이터베이스와 SQL 맛보기
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/01/04/hongon_s_01/" class="article-date">
+	  <time datetime="2023-01-03T15:30:23.000Z" itemprop="datePublished">2023-01-04</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/04/hongon_s_01/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <center>
+<img width=400px src=https://img.freepik.com/free-vector/isometric-sql-illustration_23-2149260766.jpg>
+<p><font color=gray>SQL<br><font size=1>Designed by Freepic</font></font></center></p>
+<p><br><br></p>
+<h1 id="데이터베이스supdatabase-dbsup"><a class="markdownIt-Anchor" href="#데이터베이스supdatabase-dbsup"></a> 데이터베이스<sup>DATABASE, DB</sup></h1>
+<ul>
+<li>데이터베이스는 데이터들의 집합을 의미한다.<br><br></li>
+<li>DBMS<sup>Database Management System</sup>는 데이터베이스를 관리/운영하는 소프트웨어이다.
+<ul>
+<li>종류
+<ul>
+<li>계층형<sup>Hierarchical</sup> DBMS</li>
+<li>망형<sup>Network</sup> DBMS</li>
+<li>관계형<sup>Relational</sup> DBMS, RDBMS⭐️  <br><br></li>
+</ul>
+</li>
+<li>도구
+<ul>
+<li>MySQL, MariaDB, PostgreSQL, Oracle, SQL server, DB2, Access, SQLite 등<br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SQL<sup>Structured Query Language</sup>은 RDBMS에서 사용되는 언어이다.
+<ul>
+<li>국제표준화기구에서 지정한 표준 SQL가 기반이 되므로 여러 DBMS의 공통적인 부분이다.<br>(소프트웨어 별로 특성을 고려해서 다른점도 있다)<br><br></li>
+<li>SQL 혹은 시퀄 이라고 발음한다.<br>초기에는 SEQUEL<sup><b>S</b>tructured <b>E</b>nglish <b>Que</b>ry <b>L</b>anguage</sup>라는 이름이었고 이를 &quot;시퀄&quot;이라고 발음해서, 현재도 시퀄로 줄여 말하는 경우가 많다.<br><em><a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/SQL">SEQUEL이 SQL로 바뀐 이유는 이미 사용하는 상표가 있었기 때문이라고… </a></em></li>
+</ul>
+</li>
+</ul>
+<p><br><br></p>
+<h1 id="데이터베이스-모델링supdatabase-modelingsup"><a class="markdownIt-Anchor" href="#데이터베이스-모델링supdatabase-modelingsup"></a> 데이터베이스 모델링<sup>Database modeling</sup></h1>
+<center>
+<img width=400px src=https://img.freepik.com/free-vector/waterfall-method-concept-illustration_114360-9829.jpg?w=740&t=st=1672670059~exp=1672670659~hmac=ff010263cc7806ce29a45a999c5157f255ca3d8d3b7114ffedd206c8ff8aaf6c>
+<br>
+<font color=gray>Waterfall Method Concept<br><font size=1>Designed by Freepic</font></font>
+</center>
+<p><br><br></p>
+<ul>
+<li>
+<p>폭포수 모델<sup>Water Fall</sup></p>
+<ul>
+<li>프로젝트<sup>Project</sup> 진행에는 대표적으로 폭포수 모델을 사용한다.</li>
+<li>데이터베이스 모델링은 요구사항 분석<sup>Requirements</sup>과 시스템 설계<sup>Design</sup> 단계에 해당된다.<br><br></li>
+</ul>
+</li>
+<li>
+<p>데이터베이스 모델링은 데이터 특성을 테이블 형태로 정리해 놓은 것. 예를 들어, 사람의 특징은 이름, 키, 성별, 주소 등으로 만들 수 있다.</p>
+</li>
+<li>
+<p>데이터베이스 모델링에 정답은 없지만, <b>좋은 모델링과 나쁜 모델링은 존재한다</b>.</p>
+<ul>
+<li>모델링 자체로도 몇 권의 책으로 낼만큼 광범위하다.</li>
+<li>데이터의 특성과 실무적인 노하우도 필요하며, 이에 대해서는 별도 공부가 필요하다.<br><br></li>
+</ul>
+</li>
+<li>
+<p>데이터베이스 구성</p>
+<ul>
+<li>DBMS</li>
+<li>데이터베이스</li>
+<li>테이블
+<ul>
+<li>행<sup>row</sup></li>
+<li>열<sup>column</sup></li>
+<li>열 이름<sup>column name</sup></li>
+<li>기본 키<sup>Primary Key</sup></li>
+</ul>
+</li>
+<li>SQL</li>
+</ul>
+</li>
+</ul>
+<h1 id="데이터베이스-맛보기"><a class="markdownIt-Anchor" href="#데이터베이스-맛보기"></a> 데이터베이스 맛보기</h1>
+<p>데이터베이스를 구축하는 절차는 다음과 같다.</p>
+<ul>
+<li>데이터베이스 생성</li>
+<li>테이블 생성</li>
+<li>데이터 입력/수정/삭제</li>
+<li>데이터 조회/활용</li>
+</ul>
+<p>각 단계를 간단히 살펴보자.</p>
+<p>(MySQL과 MySQL workbench를 이용하였다.)</p>
+<br>
+<h2 id="1-데이터베이스-만들기"><a class="markdownIt-Anchor" href="#1-데이터베이스-만들기"></a> 1. 데이터베이스 만들기</h2>
+<p>스키마<sup>Schema</sup>는 MySQL 안의 데이터베이스를 말하고, 데이터베이스와 동일한 용어라고 생각하면 된다.</p>
+<ol>
+<li>MySQL workbench에서 좌측 <code>SCHEMAS</code> 패널의 빈공간을 우클릭하여 <code>Create Schema</code>를 선택한다.</li>
+<li>Name에 <code>shop_db</code>를 입력 후 <code>Apply</code>를 클릭하면 <code>Apply SQL Script to Database</code> 창에 SQL 스크립트가 생성된다.</li>
+<li><code>Apply</code>와 <code>Finish</code>를 진행하면 <code>shop_db</code> 데이터베이스가 생성된다.</li>
+</ol>
+<p>여기서는 GUI를 기준으로 설명했는데, 앞으로는 코드 기반으로 설명하겠다.</p>
+<p><strong>Query</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE shop_db;</span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="2-테이블-만들기"><a class="markdownIt-Anchor" href="#2-테이블-만들기"></a> 2. 테이블 만들기</h2>
+<p>테이블은 행<sup>row</sup>과 열<sup>column</sup>로 되어있는데, 처음에는 설계를 해야한다.</p>
+<p>열에 대한 이름, 데이터 타입, 최대 길이, Null 허용 여부<sup>Not Null, NN</sup>을 지정해야한다.</p>
+<br>
+<p>쇼핑몰의 회원목록을 데이터베이스에 테이블로 저장한다고 하자. 아래에 예시 테이블이 있다.</p>
+<br>
+<center>
+<table>
+<thead>
+<tr>
+<th>member_id</th>
+<th>member_name</th>
+<th>member_addr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hero</td>
+<td>임영웅</td>
+<td>서울 은평구 증산동</td>
+</tr>
+<tr>
+<td>iyou</td>
+<td>아이유</td>
+<td>인천 남구 주안동</td>
+</tr>
+<tr>
+<td>jyp</td>
+<td>박진영</td>
+<td>경기 고양시 장항동</td>
+</tr>
+<tr>
+<td>tess</td>
+<td>나훈아</td>
+<td>경기 부천시 중동</td>
+</tr>
+</tbody>
+</table>
+<p><font color=gray>쇼핑몰 회원 목록</font></p>
+</center>
+<br>
+<p><code>member_id</code>, <code>member_name</code>, <code>member_addr</code> 의 데이터 타입, 최대 길이, Not Null 여부 등을 지정해야한다. 아래처럼 설계를 했다고 해보자.</p>
+<br>
+<center>
+<table>
+<thead>
+<tr>
+<th>열 이름 (한글)</th>
+<th>영문 이름</th>
+<th>데이터 형식</th>
+<th>최대 길이</th>
+<th>Not Null</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>아이디 (기본 키)</td>
+<td>member_id</td>
+<td>CHAR</td>
+<td>8</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>회원 이름</td>
+<td>member_name</td>
+<td>CHAR</td>
+<td>5</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>주소</td>
+<td>member_addr</td>
+<td>CHAR</td>
+<td>20</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><font color=gray>회원 목록의 테이블 설계</font></p>
+</center>
+<br>
+<p><strong>참고</strong></p>
+<blockquote>
+<p>데이터 타입은 여러 형태가 있다. CHAR는 문자<sup>character</sup>를 의미한다. 새로운 타입이 나오면 처음에 한번만 설명을 작성하겠다.</p>
+</blockquote>
+<h4 id="member-테이블-생성"><a class="markdownIt-Anchor" href="#member-테이블-생성"></a> member 테이블 생성</h4>
+<p><strong>GUI</strong></p>
+<p><img src=/images/hongong_s_ch01_create_member_table.png><br></p>
+<br>
+<p><strong>Query</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `shop_db`.`<span class="keyword">member</span>` (</span><br><span class="line">  `member_id` <span class="type">CHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `member_name` <span class="type">CHAR</span>(<span class="number">5</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `member_addr` <span class="type">CHAR</span>(<span class="number">20</span>) <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`member_id`));</span><br></pre></td></tr></table></figure>
+<h4 id="product-테이블-생성"><a class="markdownIt-Anchor" href="#product-테이블-생성"></a> Product 테이블 생성</h4>
+<p>나중에 사용할 쇼핑몰 상품 테이블도 생성하자. 표와 테이블 설계는 아래와 같다.</p>
+<center>
+<table>
+<thead>
+<tr>
+<th>product_name</th>
+<th>cost</th>
+<th>make_date</th>
+<th>company</th>
+<th>amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>바나나</td>
+<td>1500</td>
+<td>2021-07-01</td>
+<td>델몬트</td>
+<td>17</td>
+</tr>
+<tr>
+<td>삼각김밥</td>
+<td>800</td>
+<td>2023-09-01</td>
+<td>CJ</td>
+<td>22</td>
+</tr>
+<tr>
+<td>카스</td>
+<td>2500</td>
+<td>2022-03-01</td>
+<td>OB</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><font color=gray>제품 목록</font></p>
+</center>
+<br>
+<center>
+<table>
+<thead>
+<tr>
+<th>열 이름 (한글)</th>
+<th>영문 이름</th>
+<th>데이터 형식</th>
+<th>최대 길이</th>
+<th>Not Null</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제품 이름 (기본 키)</td>
+<td>product_name</td>
+<td>CHAR</td>
+<td>4</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>가격</td>
+<td>cost</td>
+<td>INT</td>
+<td></td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>제조일자</td>
+<td>make_date</td>
+<td>DATE</td>
+<td></td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>제조회사</td>
+<td>company</td>
+<td>CHAR</td>
+<td>5</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>남은 소량</td>
+<td>amount</td>
+<td>INT</td>
+<td></td>
+<td>TRUE</td>
+</tr>
+</tbody>
+</table>
+<p><font color=gray>제품 목록의 테이블 설계</font></p>
+</center>
+<br>
+<blockquote>
+<p><code>INT</code>는 정수형, <code>DATE</code>는 날짜를 의미한다.</p>
+</blockquote>
+<br>
+<p><strong>GUI</strong></p>
+<p><img src=/images/hongong_s_ch01_create_product_table.png><br></p>
+<br>
+<p><strong>Query</strong></p>
+<p>SQL로 작성하면 아래와 같은 쿼리가 된다. 다음 부터는 GUI가 아닌 쿼리로 진행하겠다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `shop_db`.`product` (</span><br><span class="line">  `product_name` <span class="type">CHAR</span>(<span class="number">4</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `cost` <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `make_date` <span class="type">DATE</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `company` <span class="type">CHAR</span>(<span class="number">5</span>) <span class="keyword">NULL</span>,</span><br><span class="line">  `amount` <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`product_name`));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>이로써 회원 목록 (member)와 제품 목록 (product) 테이블을 생성하였였다.</p>
+<h2 id="3-데이터-입력하기"><a class="markdownIt-Anchor" href="#3-데이터-입력하기"></a> 3. 데이터 입력하기</h2>
+<p>위 쇼핑몰 회원 목록 데이터를 입력해보자.</p>
+<p>SQL에서 데이터 입력에는 <code>INSERT</code> 예약어를 사용한다. 데이터는 행<sup>row</sup> 단위로 입력한다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`<span class="keyword">member</span>` (`member_id`, `member_name`, `member_addr`) <span class="keyword">VALUES</span> (<span class="string">&#x27;tess&#x27;</span>, <span class="string">&#x27;나훈아&#x27;</span>, <span class="string">&#x27;경기 부천시 중동&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`<span class="keyword">member</span>` (`member_id`, `member_name`, `member_addr`) <span class="keyword">VALUES</span> (<span class="string">&#x27;hero&#x27;</span>, <span class="string">&#x27;임영웅&#x27;</span>, <span class="string">&#x27;서울 은평구 증산동&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`<span class="keyword">member</span>` (`member_id`, `member_name`, `member_addr`) <span class="keyword">VALUES</span> (<span class="string">&#x27;iyou&#x27;</span>, <span class="string">&#x27;아이유&#x27;</span>, <span class="string">&#x27;인천 남구 주안동&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`<span class="keyword">member</span>` (`member_id`, `member_name`, `member_addr`) <span class="keyword">VALUES</span> (<span class="string">&#x27;jyp&#x27;</span>, <span class="string">&#x27;박진영&#x27;</span>, <span class="string">&#x27;경기 고양시 장항동&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>제품 테이블도 데이터를 입력하자.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`product` (`product_name`, `cost`, `make_date`, `company`, `amount`) <span class="keyword">VALUES</span> (<span class="string">&#x27;바나나&#x27;</span>, <span class="string">&#x27;1500&#x27;</span>, <span class="string">&#x27;2021-07-01&#x27;</span>, <span class="string">&#x27;델몬트&#x27;</span>, <span class="string">&#x27;17&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`product` (`product_name`, `cost`, `make_date`, `company`, `amount`) <span class="keyword">VALUES</span> (<span class="string">&#x27;삼각김밥&#x27;</span>, <span class="string">&#x27;800&#x27;</span>, <span class="string">&#x27;2023-09-01&#x27;</span>, <span class="string">&#x27;CJ&#x27;</span>, <span class="string">&#x27;22&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`product` (`product_name`, `cost`, `make_date`, `company`, `amount`) <span class="keyword">VALUES</span> (<span class="string">&#x27;카스&#x27;</span>, <span class="string">&#x27;2500&#x27;</span>, <span class="string">&#x27;2022-03-01&#x27;</span>, <span class="string">&#x27;OB&#x27;</span>, <span class="string">&#x27;3&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>생성된 테이블을 확인해보자. 테이블을 조회할 때는 <code>SELECT</code> 예약어를 사용한다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> shop_db.member;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> shop_db.product;</span><br></pre></td></tr></table></figure>
+<img src=/images/hongong_s_ch01_member_table.png>
+<img src=/images/hongong_s_ch01_product_table.png>
+<p>참고</p>
+<blockquote>
+<p>지금은 <code>SELECT * FROM shop_db.member;</code> 으로 조회하였는데,<br />
+MySQL에서는 schema에 있는 데이터베이스를 더블 클릭하면 데이터베이스 이름이 굵게 변하는데, 이는 기본 데이터베이스를 선택한 것이다. 이 때부터는 데이터베이스 명을 따로 입력하지 않고 테이블 명만 입력해도 테이블을 조회할 수 있다.<br />
+코드로는 <code>USE shop_db;</code>로 선택할 수 있다. 선택한 후에는 다음처럼 사용하면 된다.<br />
+<code>SELECT * FROM member;</code></p>
+</blockquote>
+<h4 id="몇-가지-더-해보기"><a class="markdownIt-Anchor" href="#몇-가지-더-해보기"></a> 몇 가지 더 해보기</h4>
+<p><strong>추가</strong></p>
+<p>생성된 테이블에 새로 추가가 가능하다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `shop_db`.`<span class="keyword">member</span>` (`member_id`, `member_name`, `member_addr`) <span class="keyword">VALUES</span> (<span class="string">&#x27;carry&#x27;</span>, <span class="string">&#x27;머라이어&#x27;</span>, <span class="string">&#x27;미국 텍사스 사막&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>수정</strong></p>
+<p>존재하는 <code>row</code>를 수정할 수 있다. 수정에는 <code>UPDATE</code> 예약어를 사용한다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> `shop_db`.`<span class="keyword">member</span>` <span class="keyword">SET</span> `member_addr` <span class="operator">=</span> <span class="string">&#x27;영국 런던 먹자골목&#x27;</span> <span class="keyword">WHERE</span> (`member_id` <span class="operator">=</span> <span class="string">&#x27;carry&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>삭제</strong></p>
+<p>데이터 삭제도 가능하다. <code>WHERE</code> 예약어를 사용하면 조건에 해당하는 <code>row</code>를 삭제할 수 있다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> `shop_db`.`<span class="keyword">member</span>` <span class="keyword">WHERE</span> (`member_id` <span class="operator">=</span> <span class="string">&#x27;carry&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<br>
+<h2 id="4-데이터-조회하기"><a class="markdownIt-Anchor" href="#4-데이터-조회하기"></a> 4. 데이터 조회하기</h2>
+<p><code>SELECT</code> 다음에 나오는 <code>*</code><sup>asterisk</sup>는 모든 Column을 의미하는 wild card이다. 여기에 column을 특정해서 조회할 수도 있다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> member_id, member_addr <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
+<p>이번에는 특정 row만 추출하는 방법을 알아보자. 회원 명단에서 <strong>아이유</strong> 회원의 정보만 표시하려면 어떻게 하면 될까?</p>
+<p>위에서 간략하게 표시했지만, <code>WHERE</code> 예약어는 특정 조건을 입력하여 원하는 row만 추출할 수 있게 해준다. 다음처럼 작성하면 된다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> member_name <span class="operator">=</span> &quot;아이유&quot;;</span><br></pre></td></tr></table></figure>
+<p>아래처럼 아이유 회원의 row만 조회된다.</p>
+<img src=/images/hongong_s_ch01_mission01.png>
+<p><br><br></p>
+<h1 id="데이터베이스-개체"><a class="markdownIt-Anchor" href="#데이터베이스-개체"></a> 데이터베이스 개체</h1>
+<p>데이터베이스에는 핵심 개체인 테이블 외에 다음 개체도 중요하다.</p>
+<ul>
+<li>인덱스<sup>INDEX</sup> : 조회 결과를 빠르게 해준다.</li>
+<li>뷰<sup>VIEW</sup> : 테이블 일부를 제한적으로 보여준다.</li>
+<li>스토어드 프로시져<sup>Stored Procedure, SP</sup> : SQL 쿼리문의 집합으로, Python의 함수 정의와 비슷하다.</li>
+<li>트리거<sup>Trigger</sup>: 잘못된 데이터 입력 방지.</li>
+</ul>
+<h3 id="인덱스"><a class="markdownIt-Anchor" href="#인덱스"></a> 인덱스</h3>
+<p>여러 분야에서 사용되는 용어이고, 빠르게 데이터를 찾는데 사용된다.</p>
+<p>예시를 위해 위에서 사용한 쿼리를 가져왔다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> member_name <span class="operator">=</span> &quot;아이유&quot;;</span><br></pre></td></tr></table></figure>
+<p>이 쿼리가 어떻게 실행되었는 지는 <code>Execution Plan</code>을 보면 알 수 있다.</p>
+<img src=/images/hongong_s_ch01_execution_plan_before_indexing.png>
+<p>해당 쿼리는 <code>Full Table Scan</code> 을 사용했다. cost는 0.65이고 처음부터 끝까지 일일히 찾은 결과이다.</p>
+<p><code>INDEX</code>를 생성하고 다시 조회를 해보자.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idx_member_name <span class="keyword">ON</span> <span class="keyword">member</span>(member_name);</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> member_name <span class="operator">=</span> &quot;아이유&quot;;</span><br></pre></td></tr></table></figure>
+<img src=/images/hongong_s_ch01_execution_plan_after_indexing.png>
+<p>해당 쿼리는 <code>Non-Unique Key Lookup</code>을 사용하였고 Cost는 0.35로 감소한 것을 확인할 수 있다.</p>
+<p>이런 조회 방법을 인덱스 스캔<sup>Index scan</sup> 이라고 한다.</p>
+<br>
+<h3 id="뷰"><a class="markdownIt-Anchor" href="#뷰"></a> 뷰</h3>
+<p><code>뷰</code>는 테이블을 직접 보여주는 것이 아닌 바로가기 같은 개체이다.</p>
+<p>다음의 쿼리는 <code>VIEW</code>를 <code>member_view</code>라는 이름으로 생성하였다.<br />
+이는 <code>member</code> 테이블을 가리킨다. 그 다음, <code>member_view</code>를 조회해보았다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> member_view</span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line">	<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> member_view;</span><br></pre></td></tr></table></figure>
+<br>
+<p>결과<br />
+<img src=/images/hongong_s_ch01_view.png></p>
+<br>
+<p>아무리 살펴봐도 똑같다. 왜냐하면 바로가기니까.</p>
+<p><code>뷰</code>를 사용해도 눈으로 보는 사용자는 사용하기 전과 차이가 없다.</p>
+<p>그렇다면 왜 사용하는걸까? 다음의 <strong>장점</strong>이 존재한다.</p>
+<ol>
+<li>보안에 도움이 된다.</li>
+<li>긴 SQL을 간략하게 해준다.</li>
+</ol>
+<h3 id="스토어드-프로시져"><a class="markdownIt-Anchor" href="#스토어드-프로시져"></a> 스토어드 프로시져</h3>
+<p>Stored procedure는 SQL 쿼리를 묶어주는 역할을 한다. 스크립트 처럼 사용할 수 있고, 연산식, 조건문, 반복문도 포함시킬 수 있다.</p>
+<p><strong>예시</strong></p>
+<p>다음의 쿼리는 2개의 테이블에서 각각 조회를 하는 쿼리이다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> member_name <span class="operator">=</span> &quot;나훈아&quot;;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> product <span class="keyword">WHERE</span> product_name <span class="operator">=</span> &quot;삼각김밥&quot;;</span><br></pre></td></tr></table></figure>
+<p>다음은 <code>PROCEDURE</code>를 생성하는 쿼리이다. <code>DELIMITER</code> 구분자가 있는데 이는 <code>PROCEDURE</code>를 묶는 개념이고, <code>BEGIN</code>, <code>END</code>안에  SQL 쿼리를 넣어줘야 한다는 것만 알고 넘어가자.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- DROP PROCEDURE myProc; 생성한 PROCEDURE를 지울 떄에는 DROP을 사용하면된다.</span></span><br><span class="line">DELIMITER <span class="operator">/</span><span class="operator">/</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> myProc()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span> <span class="keyword">WHERE</span> member_name <span class="operator">=</span> &quot;나훈아&quot;;</span><br><span class="line">	<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> product <span class="keyword">WHERE</span> product_name <span class="operator">=</span> &quot;삼각김밥&quot;;</span><br><span class="line"><span class="keyword">END</span> <span class="operator">/</span><span class="operator">/</span></span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<p>Procedure 실행. 실행에는 <code>CALL</code> 예약어가 사용된다</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CALL</span> myProc();</span><br></pre></td></tr></table></figure>
+<p>결과는 처음의 2개 쿼리와 같다.</p>
+<p><br><br></p>
+<p>데이터베이스, DBMS, 데이터베이스 살짝 맛보기, 데이터베이스 객체에 대해 정리하였고 여기서 마치겠습니다.</p>
+<p>읽어주셔서 감사드립니다.</p>
+<!-- flag of hidden posts -->
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jonghwanyoon.github.io/2023/01/04/hongon_s_01/" title="SQL | 데이터베이스와 SQL 맛보기" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/01/04/hongon_s_01/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote> -->
+<!-- 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jonghwanyoon.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/blue_whale.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jonghwanyoon.github.io/" target="_blank"><span class="text-dark">jonghwanyoon</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+ -->
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Jonghwan Yoon
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+            Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://jonghwanyoon.github.io/2023/01/04/hongon_s_01/';
+        
+        this.page.identifier = 'hongon_s_01';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wg-yoon' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140384355-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

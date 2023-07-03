@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="naver-site-verification" content="29892ce904ec6054137e0bb84d2f2197d1eb56f4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>ML | 패션잡화 이미지의 분류를 해보자 - 인공신경망 | jonghwanyoon</title><meta name="robots" content="noindex">
+  <meta name="description" content="Fashion MNIST  Keras를 이용한 Fashion MNIST 데이터의 Classification을 해보겠습니다. 오늘 사용될 데이터는 Fashion MNIST입니다. 이는 핸드라이팅으로 만든 6만장의 훈련세트 와, 1만장의 테스트세트로 구성된 이미지 데이터입니다.  데이터 불러오기 123456from tensorflow import keras(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML | 패션잡화 이미지의 분류를 해보자 - 인공신경망">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/02/13/hongong-ml-06/index.html">
+<meta property="og:site_name" content="Jonghwan Yoon">
+<meta property="og:description" content="Fashion MNIST  Keras를 이용한 Fashion MNIST 데이터의 Classification을 해보겠습니다. 오늘 사용될 데이터는 Fashion MNIST입니다. 이는 핸드라이팅으로 만든 6만장의 훈련세트 와, 1만장의 테스트세트로 구성된 이미지 데이터입니다.  데이터 불러오기 123456from tensorflow import keras(">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-13T10:04:25.000Z">
+<meta property="article:modified_time" content="2023-07-03T12:13:21.768Z">
+<meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="혼공학습단">
+<meta property="article:tag" content="혼공">
+<meta property="article:tag" content="혼공머신">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/02/13/hongong-ml-06/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jonghwanyoon.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/blue_whale.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">jonghwanyoon</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Seoul, South Korea</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <!-- 
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13px;">Hexo</a> <a href="/tags/%ED%98%BC%EA%B3%B5/" style="font-size: 13px;">혼공</a> <a href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" style="font-size: 13px;">혼공학습단</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/hongong-9th-summary/" class="title">혼공학습단 9기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T11:54:43.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Hexo/">Hexo</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/11/hexo_embed_html/" class="title">Hexo에서 HTML 파일을 Markdown에 삽입하기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-11T13:15:35.000Z" itemprop="datePublished">2023-01-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hongong-ml-06" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ML | 패션잡화 이미지의 분류를 해보자 - 인공신경망
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/02/13/hongong-ml-06/" class="article-date">
+	  <time datetime="2023-02-13T10:04:25.000Z" itemprop="datePublished">2023-02-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/13/hongong-ml-06/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <img width=90% src=https://storage.googleapis.com/kaggle-datasets-images/2243/3791/9384af51de8baa77f6320901f53bd26b/dataset-cover.png>
+<p><sup>Fashion MNIST</sup></p>
+<p><br><br></p>
+<p>Keras를 이용한 Fashion MNIST 데이터의 Classification을 해보겠습니다. 오늘 사용될 데이터는 Fashion MNIST입니다. 이는 핸드라이팅으로 만든 6만장의 훈련세트 와, 1만장의 테스트세트로 구성된 이미지 데이터입니다.</p>
+<br>
+<p><strong>데이터 불러오기</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras</span><br><span class="line">(train_input, train_target), (test_input, test_target) = \</span><br><span class="line">    keras.datasets.fashion_mnist.load_data()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_input.shape, train_target.shape)</span><br><span class="line"><span class="comment"># (60000, 28, 28) (60000,)</span></span><br></pre></td></tr></table></figure>
+<p>데이터는 28x28로 이루어진 이미지입니다.</p>
+<p>옷을 10개만 확인해보면 이미지는 다음처럼 생겼습니다.</p>
+<img src=/images/hongong_ml_06_fig1.png>
+<p><br><br></p>
+<p>우선 <strong>LogisticRegression</strong>으로 먼저 분류를 해보겠습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 255로 나누어 정규화 하고 1차원 배열로 변환.</span></span><br><span class="line">train_scaled = train_input / <span class="number">255</span></span><br><span class="line">train_scaled = train_scaled.reshape(-<span class="number">1</span>, <span class="number">28</span>*<span class="number">28</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_validate</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier</span><br><span class="line">sc = SGDClassifier(loss = <span class="string">&quot;log&quot;</span>, max_iter = <span class="number">5</span>, random_state = <span class="number">42</span>)</span><br><span class="line">scores = cross_validate(sc, train_scaled, train_target, n_jobs=<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(np.mean(scores[<span class="string">&quot;test_score&quot;</span>]))</span><br><span class="line"><span class="comment"># 0.8192833333333333</span></span><br></pre></td></tr></table></figure>
+<p>성능이 0.82 정도로 나타납니다. 아주 좋지는 않습니다.</p>
+<p>LogisticRegression으로 분류했으므로, 선형방정식을 학습했을 것입니다. 여기서는 28x28의 이미지를 1차원 배열로 만들어서 입력했으므로 다음과 같은 방정식이 있을 것입니다.</p>
+<br>
+$
+\begin{align}
+z_{1} = w_{1,1}*\text{pixel}_1 + w_{2,1}*\text{pixel}_2 + ... + w_{784,1}*\text{pixel}_{784} + b_1 \\\
+
+z_{2} = w_{1,2}*\text{pixel}_1 + w_{2,2}*\text{pixel}_2 + ... + w_{784,2}*\text{pixel}_{784} + b_2
+\end{align}
+$
+<p><br><br></p>
+<p>$ z_1 $, $ z_1 $ 은 각각 1번 째, 2번 째 라벨에 대한 값입니다. 그리고 $ w_{픽셀,라벨} $는 가중치이고 $ b $ 는 절편입니다.</p>
+<p>티셔츠에 대해 각 특성 (픽셀)에 가중치를 곱하여 절편과 함께 모두 더한 값이 $ z_{1} $ 입니다. 바지, 신발, 원피스, 등등 도 같습니다.</p>
+<p>그림으로는 아래처럼 나타낼 수 있습니다.</p>
+<p><br><br></p>
+<p><strong>LogisticRegression 시각화</strong></p>
+<center>
+<img width=600px src=https://carpentries-incubator.github.io/ml4bio-workshop/assets/logit_nodes.png>
+<p><sup><a target="_blank" rel="noopener" href="https://carpentries-incubator.github.io/ml4bio-workshop/05-logit-ann/index.html">carpentries-incubator.github.io</a></sup></p>
+</center >
+<br>
+<p>왼쪽의 x는 픽셀값입니다. 가중치와 곱해져서 z로 합쳐지고, 로지스틱 함수에 의해 y값이 산출됩니다. 이는 <strong>인공 신경망</strong>이 작동하는 원리와 비슷합니다.</p>
+<p><br><br></p>
+<p><strong>인공신경망 시각화</strong></p>
+<center>
+<img width=600px src=https://carpentries-incubator.github.io/ml4bio-workshop/assets/ann_nodes.png>
+<p><sup><a target="_blank" rel="noopener" href="https://carpentries-incubator.github.io/ml4bio-workshop/05-logit-ann/index.html">carpentries-incubator.github.io</a></sup></p>
+</center >
+<p>위에서 Hidden Layer를 제외한다면 거의 같은 모양입니다. 인공신경망에서는 몇가지 용어가 있는데 정리하면 다음과 같습니다.</p>
+<ul>
+<li>$ z $ 값을 계산하는 단위를 뉴런 <sup>neuron</sup>이라 합니다. 유닛<sup>Unit</sup>이라 부르기도 합니다.</li>
+<li>x값이 들어오는 층을 입력층<sup>Input Layer</sup>라 합니다.</li>
+<li>최종 값을 만드는 층을 출력층<sup>Output Layer</sup>라 합니다.</li>
+</ul>
+<p><br><br></p>
+<h3 id="케라스supkerassup"><a class="markdownIt-Anchor" href="#케라스supkerassup"></a> 케라스<sup>Keras</sup></h3>
+<ul>
+<li>
+<p>케라스는 딥러닝 프레임워크로 텐서플로의 고수준 API입니다.</p>
+</li>
+<li>
+<p>딥러닝과 머신러닝의 차이 중 하나는 GPU를 사용한다는 것입니다. GPU는 행렬 연산에 최적화되어 있기 때문어서, 인공신경망에 큰 도움이 됩니다. nvidia에서 차이를 보여주기 위한 예시도 있습니다. <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=-P28LKWTzrI">출처</a> <br><br><div></p>
+<p><strong>CPU</strong> <img width=400px src=https://thumbs.gfycat.com/ContentWebbedChevrotain-size_restricted.gif></p>
+ <br>
+<p><strong>GPU</strong>  <img width=400px src=https://thumbs.gfycat.com/OblongConcreteIvorybilledwoodpecker-size_restricted.gif></p>
+ </div><br>
+</li>
+<li>
+<p>케라스 프레임워크로써 텐서플로를 backend로 사용합니다. GPU연산은 텐서플로가 직접합니다. 또한 씨아노, CNTK 등도 backend로 사용할 수 있습니다.</p>
+</li>
+<li>
+<p>여기서는 텐서플로를 backend로 케라스를 사용합니다.</p>
+</li>
+</ul>
+<br>
+<p>keras로 패션잡화를 다시 분류해보겠습니다.</p>
+<p><strong>데이터 전처리</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">train_scaled, val_scaled, train_target, val_target =  train_test_split(</span><br><span class="line">    train_scaled, train_target, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_scaled.shape, train_target.shape)</span><br><span class="line"><span class="comment"># (48000, 784) (48000,)</span></span><br><span class="line"><span class="built_in">print</span>(val_scaled.shape, val_target.shape)</span><br><span class="line"><span class="comment"># (12000, 784) (12000,)</span></span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p><strong>밀집층 만들기</strong></p>
+<p>밀집층<sup>Dense Layer</sup>는 케라스에서 기본이 되는 레이어입니다. 위에서 확인한 패션 MNIST 데이터의 크기는 28x28 = 784로 784개의 feature가 10가지 옷 종류인 z1 ~ z10으로 이어집니다. 784x10 = 7,840 개의 선으로 이어져 있습니다.</p>
+<blockquote>
+<p>좌/우 뉴런이 모두 연결되어 있는 것을 완전 연결층<sup>Fully connected layer</sup>라고 합니다.</p>
+</blockquote>
+<br>
+<p>밀집층은 다음처럼 불러올 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dense = keras.layers.Dense(<span class="number">10</span>, activation=<span class="string">&quot;softmax&quot;</span>, input_shape=(<span class="number">784</span>,))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>10은 positional argument로, 뉴런의 개수를 의미합니다.</li>
+<li>activation은 뉴런 출력에 적용할 함수를 입력합니다. 결과계산에 적용하게 되는 활성화 함수<sup>activation function</sup>입니니다.</li>
+<li>input_shape는 인풋 데이터의 형태를 의미합니다.</li>
+</ul>
+<br>
+<p>모델은 다음처럼 지정할 수 있습니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = keras.Sequential(dense)</span><br><span class="line">model.<span class="built_in">compile</span>(loss = <span class="string">&quot;sparse_categorical_crossentropy&quot;</span>, metrics = <span class="string">&quot;accuracy&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>모델을 지정하고 compile을 해주어야 하는데, 손실함수의 종류를 지정해줘야합니다.</li>
+<li>케라스의 loss function
+<ul>
+<li>이진 분류는 <strong>binary_crossentropy</strong>라고 부릅니다.</li>
+<li>다중 분류는 <strong>categorical_crossentropy</strong>로 부릅니다.</li>
+<li>이진 분류는 양성 클래스와 음성 클래스에 대한 cross entropy를 계산하지만, 다중분류는 여러 클래스에 대한 출력층 뉴런이 존재하고, 10개 클래스에 대한 확률을 만들게 됩니다. 10개중 하나의 클래스만이 정답이므로 정답은 1 나머지는 0으로 만들어서 각 확률에 곱해준다면, 타겟에 맞는 뉴런의 출력만 남기게 됩니다. 클래스를 0, 1로 표현하게 해주는 것을 <strong>원-핫 인코딩</strong>이라고 합니다.</li>
+<li><strong>sparse_categorical_crossentropy</strong>는 원-핫 인코딩이 필요없이 정수형으로 된 타겟값을 받고 cross entropy를 계산해주는 손실함수입니다.</li>
+<li>(참고) 원-핫 인코딩이 된 데이터를 사용하려면 loss function으로 <strong>categorical_crossentropy</strong>를 이용하면 됩니다.</li>
+</ul>
+</li>
+<li>metrics
+<ul>
+<li>모델이 훈련할 때마다 에포크 손실값을 출력하는데, 에포크마다 손실 변화에 따른 정확도같이 확인하기 위해 지정해 줍니다.</li>
+</ul>
+</li>
+</ul>
+<br>
+<p><strong>훈련</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">model.fit(train_scaled, train_target, epochs=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Epoch 1/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 1ms/step - loss: 0.6066 - accuracy: 0.7923</span></span><br><span class="line"><span class="comment"># Epoch 2/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 1ms/step - loss: 0.4741 - accuracy: 0.8396</span></span><br><span class="line"><span class="comment"># Epoch 3/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 1ms/step - loss: 0.4513 - accuracy: 0.8474</span></span><br><span class="line"><span class="comment"># Epoch 4/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 1ms/step - loss: 0.4382 - accuracy: 0.8523</span></span><br><span class="line"><span class="comment"># Epoch 5/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 1ms/step - loss: 0.4302 - accuracy: 0.8528</span></span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>성능 확인</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.evaluate(val_scaled, val_target)</span><br><span class="line"><span class="comment"># [0.4375309348106384, 0.8503333330154419]</span></span><br></pre></td></tr></table></figure>
+<br>
+<p>검증세트의 성능은 훈련세트보다는 조금 점수가 낮은것이 일반적입니다.</p>
+<p>성능은 85% 정도가 나타났습니다.</p>
+<p><br><br></p>
+<!-- # Deep Neural Network<sup>DNN</sup> -->
+<h3 id="은닉층-추가해보기"><a class="markdownIt-Anchor" href="#은닉층-추가해보기"></a> 은닉층 추가해보기</h3>
+<p>위에서는 1개의 층만 사용했지만, 이번에는 층을 2개 추가해보겠습니다. 입력층과 출력층 사이에 밀집층이 하나 더 추가된 것이고, 이런 층을 <strong>은닉층</strong><sup>hidden layer</sup>라고 합니다.</p>
+<ul>
+<li>은닉층도 활성화 함수를 지정해줘야합니다. 대표적으로 시그모이드, 렐루 함수가 있습니다.</li>
+<li>은닉층에 활성화 함수를 지정하는 이유는, 선형적 산술 계산만 하는 것이 아닌 비선형적으로 만들어주기 위함입니다.</li>
+<li>참고) 회귀에서는 임의의 숫자를 예측해주므로 활성화 함수를 적용할 필요가 없습니다.</li>
+</ul>
+<br>
+<p><strong>모델 만들기</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dense1 = keras.layers.Dense(<span class="number">100</span>, activation = <span class="string">&quot;sigmoid&quot;</span>, input_shape = (<span class="number">784</span>, ))</span><br><span class="line">dense2 = keras.layers.Dense(<span class="number">10</span>, activation = <span class="string">&quot;softmax&quot;</span>)</span><br><span class="line"></span><br><span class="line">model = keras.Sequential([dense1, dense2])</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>모델에 대한 정보 확인</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model.summary()</span><br><span class="line"><span class="comment"># Model: &quot;sequential_1&quot;</span></span><br><span class="line"><span class="comment"># _________________________________________________________________</span></span><br><span class="line"><span class="comment">#  Layer (type)                Output Shape              Param #   </span></span><br><span class="line"><span class="comment"># =================================================================</span></span><br><span class="line"><span class="comment">#  dense_1 (Dense)             (None, 100)               78500     </span></span><br><span class="line">                                                                 </span><br><span class="line"><span class="comment">#  dense_2 (Dense)             (None, 10)                1010      </span></span><br><span class="line">                                                                 </span><br><span class="line"><span class="comment"># =================================================================</span></span><br><span class="line"><span class="comment"># Total params: 79,510</span></span><br><span class="line"><span class="comment"># Trainable params: 79,510</span></span><br><span class="line"><span class="comment"># Non-trainable params: 0</span></span><br><span class="line"><span class="comment"># _________________________________________________________________</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>레이어 이름, 클래스, 출력크기, 모델 파라미터 수가 나타납니다.</li>
+<li>Output 형태에 None이 있는 이유
+<ul>
+<li>fit을 할 때, 훈련데이터를 모두 사용하지 않고 잘게 나누어 여러번 경사 하강법을 거칩니다. -&gt; 미니 배치 경사하강법</li>
+<li>미니배치의 크기는 32로, fit 메서드를 수행할 때 batch_size로 바꿀 수 있습니다.</li>
+<li>따라서 현재 None의 의미는 샘플 개수를 고정하지 않고 어떤 배치 크기에도 유연하게 대응하겠다는 의미입니다.</li>
+</ul>
+</li>
+<li>Param은 784개 feature로 100개의 출력을 하므로 모든 조합에 대한 weight와 100개 출력에 대한 절편도 존재하므로, 78400 + 100=78500개의 모델 파라미터가 있다고 나타나게됩니다. 2번 째 층도 같습니다.</li>
+</ul>
+<br>
+<p><strong>참고) 모델을 만드는 다른 방법</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 모델 생성시 dense객체 직접 추가</span></span><br><span class="line">model = keras.Sequential([</span><br><span class="line">    keras.layers.Dense(<span class="number">100</span>, activation = <span class="string">&quot;sigmoid&quot;</span>, input_shape = (<span class="number">784</span>, )),</span><br><span class="line">    keras.layers.Dense(<span class="number">10</span>, activation = <span class="string">&quot;softmax&quot;</span>)</span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. add 메서드 이용</span></span><br><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(keras.layers.Dense(<span class="number">100</span>, activation = <span class="string">&quot;sigmoid&quot;</span>, input_shape = (<span class="number">784</span>, )))</span><br><span class="line">model.add(keras.layers.Dense(<span class="number">10</span>, activation = <span class="string">&quot;softmax&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p><strong>훈련</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">model.<span class="built_in">compile</span>(loss = <span class="string">&quot;sparse_categorical_crossentropy&quot;</span>, metrics = <span class="string">&quot;accuracy&quot;</span>)</span><br><span class="line">model.fit(train_scaled, train_target, epochs=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Epoch 1/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 3s 2ms/step - loss: 0.5681 - accuracy: 0.8091</span></span><br><span class="line"><span class="comment"># Epoch 2/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.4107 - accuracy: 0.8527</span></span><br><span class="line"><span class="comment"># Epoch 3/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3766 - accuracy: 0.8642</span></span><br><span class="line"><span class="comment"># Epoch 4/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3537 - accuracy: 0.8716</span></span><br><span class="line"><span class="comment"># Epoch 5/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3360 - accuracy: 0.8789</span></span><br></pre></td></tr></table></figure>
+<p>은닉층을 추가하니 87%으로 성능이 올랐군요. 이번에는 이미지 분류에 많이 사용되는 활성화 함수인 ReLU를 사용해보죠.</p>
+<p><br><br></p>
+<h3 id="relu"><a class="markdownIt-Anchor" href="#relu"></a> ReLU</h3>
+<center>
+<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/ReLU_and_Nonnegative_Soft_Thresholding_Functions.svg/1024px-ReLU_and_Nonnegative_Soft_Thresholding_Functions.svg.png>
+<p><a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/ReLU">Wikipedia</a></p>
+</center>
+<p><br><br></p>
+<ul>
+<li>시그모이드는 어떤 값이 들어와도 0, 1로 분류를 해주지만, 낮은 값이 들어올수록 그래프가 누워있어서 올바른 출력을 만드는데 빠지 못합니다.</li>
+<li>렐루함수는 이를 개선시키기 위해 나타났고, 한쪽 입력에서는 없는것처럼 입력을 통과시키고 값을 0으로 만들어버립니다.</li>
+</ul>
+<br>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(keras.layers.Flatten(input_shape = (<span class="number">28</span>,<span class="number">28</span>)))</span><br><span class="line">model.add(keras.layers.Dense(<span class="number">100</span>, activation = <span class="string">&quot;relu&quot;</span>))</span><br><span class="line">model.add(keras.layers.Dense(<span class="number">10</span>, activation = <span class="string">&quot;softmax&quot;</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>첫 Dense Layer에 활성화 함수로 relu를 입력해주었습니다.</li>
+<li>우리는 지금까지 28x28이미지를 1차원으로 만들어 인풋을 넣어주었습니다.<br>Flatten 층은 이를 알아서 변환해주는 층입니다. (변환만 해주므로, 신경망의 깊이가 늘어난것은 아닙니다.)<br>케라스에서는 입력데이터에 대한 전처리 과정을 될수 있으면 모델에 포함합니다.</li>
+</ul>
+<br>
+<p>Flatten 층이 있으므로 reshape로 1차원 배열을 만드는 과정 없이 해보겠습니다.</p>
+<p><strong>데이터 전처리</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(train_input, train_target), (test_input, test_target) = \</span><br><span class="line">    keras.datasets.fashion_mnist.load_data()</span><br><span class="line">train_scaled = train_input / <span class="number">255</span></span><br><span class="line">train_scaled, val_scaled, train_target, val_target =  train_test_split(</span><br><span class="line">    train_scaled, train_target, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(train_scaled.shape, train_target.shape)</span><br><span class="line"><span class="comment"># (48000, 28, 28) (48000,)</span></span><br><span class="line"><span class="built_in">print</span>(val_scaled.shape, val_target.shape)</span><br><span class="line"><span class="comment"># (12000, 28, 28) (12000,)</span></span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>훈련</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">model.<span class="built_in">compile</span>(loss = <span class="string">&quot;sparse_categorical_crossentropy&quot;</span>, metrics = <span class="string">&quot;accuracy&quot;</span>)</span><br><span class="line">model.fit(train_scaled, train_target, epochs=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># Epoch 1/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 3s 2ms/step - loss: 0.5302 - accuracy: 0.8118</span></span><br><span class="line"><span class="comment"># Epoch 2/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3877 - accuracy: 0.8586</span></span><br><span class="line"><span class="comment"># Epoch 3/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3531 - accuracy: 0.8734</span></span><br><span class="line"><span class="comment"># Epoch 4/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 3s 2ms/step - loss: 0.3323 - accuracy: 0.8801</span></span><br><span class="line"><span class="comment"># Epoch 5/5</span></span><br><span class="line"><span class="comment"># 1500/1500 [==============================] - 2s 2ms/step - loss: 0.3169 - accuracy: 0.8863</span></span><br></pre></td></tr></table></figure>
+<br>
+<p>성능이 88%입니다. 조금이지만 렐루 함수의 영향으로 성능이 올라갔습니다.</p>
+<p><br><br></p>
+<h3 id="옵티마이저"><a class="markdownIt-Anchor" href="#옵티마이저"></a> 옵티마이저</h3>
+<p>신경망의 가중치와 절편을 학습하기 위한 알고리즘 (혹은 방법) 입니다. 이번에 등장한 하이퍼파라미터는 다음과 같이 존재할 수 있습니다.</p>
+<ul>
+<li>은닉층의 개수</li>
+<li>은닉층의 뉴런 개수</li>
+<li>활성화 함수</li>
+<li>층의 종류</li>
+<li>미니배치 경사하강법 사용시 배치 사이즈</li>
+<li>epochs 수</li>
+</ul>
+<p>케라스에는 여러 경사하강법 알고리즘이 구현되어 있습니다.</p>
+<ul>
+<li>SGD - 기본 경사하강법</li>
+<li>네스테로프 모멘텀 - 기본 경사하강법</li>
+<li>RMSprop - 적응적 학습률</li>
+<li>Adam - 적응적 학습률</li>
+<li>Adagrad - 적응적 학습률</li>
+</ul>
+<p>모멘텀은 이전의 그레이디언트를 가속도처럼 사용합니다. 적응적 학습률 옵티마이저는 모델이 최적점에 갈 수록 학습률을 낮추는데, 이렇게 하면 안정적으로 최적점에 수렴할 가능성이 높습니다.</p>
+<p><br><br></p>
+<h3 id="중간-점검"><a class="markdownIt-Anchor" href="#중간-점검"></a> 중간 점검</h3>
+<p>여기서 몇가지 중간 점검을 해보겠습니다. 오늘은 문제가 많습니다.</p>
+<br>
+<ol>
+<li>
+<p>인공신경만의 입력 특성이 100개이고 밀집층에 있는 뉴런의 수가 10개일 때, 필요한 모델파라미터의 수는?</p>
+</li>
+<li>
+<p>케라스의 Dense 클래스를 사용해 신경망의 출력층을 만들려고 합니다. 이 신경만이 이진 분류 모델이라면, activation 매개변수에 어떤 활성화 함수를 넣어야 할까요?</p>
+</li>
+<li>
+<p>케라스 모델에서 손실 함수와 측정 지표 등을 지정하는 메서드는 무엇인가요?</p>
+</li>
+<li>
+<p>정수 레이블을 타겟으로 가지는 다중 분류 문제일 때 케라스 모델의 compile() 메서드에 지정할 손실함수로 적절한 것은?</p>
+</li>
+<li>
+<p>다음 중 모델의 add() 메서드 사용법이 올바른 것은?</p>
+<p>1️⃣ model.add(keras.layers.Dense)<br />
+2️⃣ model.add(keras.layers.Dense(10, activation = “relu”))<br />
+3️⃣ model.add(keras.layers.Dense, 10, activation = “relu”)<br />
+4️⃣ model.add(keras.layers.Dense), (10, activation = “relu”))</p>
+</li>
+<li>
+<p>크기가 300x300인 입력을 케라스 층으로 펼치려고 하는데, 어떤 층을 사용해야 할까요?</p>
+</li>
+<li>
+<p>이미지 분류를 위한 심층 신경망에 널리 사용되는 케라스의 활성화 함수는 무엇일까요?</p>
+</li>
+<li>
+<p>다음 중 적응적 학습률을 사용하지 않는 옵티마이저는 무엇인가요?</p>
+<p>1️⃣ SGD<br />
+2️⃣ Adagrad<br />
+3️⃣ RMSprop<br />
+4️⃣ Adam</p>
+</li>
+</ol>
+<p><br><br>…<br><br></p>
+<ol>
+<li>
+<p>인공신경만의 입력 특성이 100개이고 밀집층에 있는 뉴런의 수가 10개일 때, 필요한 모델파라미터의 수는?</p>
+<ul>
+<li>feature, target에 따라 가중치가 존재하므로 100x10</li>
+<li>타겟 절편의 수 10</li>
+<li>따라서 모델 파라미터의 수는 <strong>1,010</strong></li>
+</ul>
+</li>
+<li>
+<p>케라스의 Dense 클래스를 사용해 신경망의 출력층을 만들려고 합니다. 이 신경만이 이진 분류 모델이라면, activation 매개변수에 어떤 활성화 함수를 넣어야 할까요?</p>
+<ul>
+<li>이진 <strong>분류</strong>에서는 보통 sigmoid 함수를 사용합니다.</li>
+</ul>
+</li>
+<li>
+<p>케라스 모델에서 손실 함수와 측정 지표 등을 지정하는 메서드는 무엇인가요?</p>
+<ul>
+<li>compile() 메서드에서 loss과 metric 파라미터로 지정할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p>정수 레이블을 타겟으로 가지는 다중 분류 문제일 때 케라스 모델의 compile() 메서드에 지정할 손실함수로 적절한 것은?</p>
+<ul>
+<li>&quot;sparse_categorical_crossentropy&quot;는 정수형 타겟 값으로 cross entropy를 계산해줍니다.</li>
+</ul>
+</li>
+<li>
+<p>다음 중 모델의 add() 메서드 사용법이 올바른 것은?</p>
+<p>1️⃣ model.add(keras.layers.Dense)<br />
+2️⃣ <strong>model.add(keras.layers.Dense(10, activation = “relu”))</strong> ⭐️<br />
+3️⃣ model.add(keras.layers.Dense, 10, activation = “relu”)<br />
+4️⃣ model.add(keras.layers.Dense), (10, activation = “relu”))</p>
+</li>
+<li>
+<p>크기가 300x300인 입력을 케라스 층으로 펼치려고 하는데, 어떤 층을 사용해야 할까요?</p>
+<ul>
+<li>Flatten 층을 사용하면 인풋 데이터를 펼치는 등의 전처리를 수행할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p>이미지 분류를 위한 심층 신경망에 널리 사용되는 케라스의 활성화 함수는 무엇일까요?</p>
+<ul>
+<li>ReLU는 시그모이드를 개선하기 위해 나왔고 이미지분류에서 성능이 좋아 널리 사용됩니다.</li>
+</ul>
+</li>
+<li>
+<p>다음 중 적응적 학습률을 사용하지 않는 옵티마이저는 무엇인가요?</p>
+<p>1️⃣ <strong>SGD</strong> ⭐️<br />
+2️⃣ Adagrad<br />
+3️⃣ RMSprop<br />
+4️⃣ Adam</p>
+</li>
+</ol>
+<p><br><br></p>
+<p>오늘은 인공 신경망의 개요에 대해 알아보았습니다.</p>
+<p>읽어주셔서 감사합니다👋</p>
+<p><br><br><br><br></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jonghwanyoon.github.io/2023/02/13/hongong-ml-06/" title="ML | 패션잡화 이미지의 분류를 해보자 - 인공신경망" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/02/13/hongong-ml-06/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote> -->
+<!-- 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jonghwanyoon.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/blue_whale.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jonghwanyoon.github.io/" target="_blank"><span class="text-dark">jonghwanyoon</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+ -->
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Jonghwan Yoon
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+            Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://jonghwanyoon.github.io/2023/02/13/hongong-ml-06/';
+        
+        this.page.identifier = 'hongong-ml-06';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wg-yoon' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140384355-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

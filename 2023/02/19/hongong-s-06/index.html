@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="naver-site-verification" content="29892ce904ec6054137e0bb84d2f2197d1eb56f4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SQL | Stored Procedure 및 Python 연결 | jonghwanyoon</title><meta name="robots" content="noindex">
+  <meta name="description" content="SQL에서 사용되는 스토어드 프로시져에 대해 정리하는 글입니다. 추가로 파이썬도 사용해보아요.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 스토어드 프로시져 ⬅ SQL과 파이썬 연결 ⬅    스토어드 프로시저Stored procedure 스토어드 프로시저는 SQL에 프로그래밍 기능을 추가해 사용">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL | Stored Procedure 및 Python 연결">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/02/19/hongong-s-06/index.html">
+<meta property="og:site_name" content="Jonghwan Yoon">
+<meta property="og:description" content="SQL에서 사용되는 스토어드 프로시져에 대해 정리하는 글입니다. 추가로 파이썬도 사용해보아요.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 스토어드 프로시져 ⬅ SQL과 파이썬 연결 ⬅    스토어드 프로시저Stored procedure 스토어드 프로시저는 SQL에 프로그래밍 기능을 추가해 사용">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-19T04:31:51.000Z">
+<meta property="article:modified_time" content="2023-07-03T11:50:39.363Z">
+<meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="혼공학습단">
+<meta property="article:tag" content="혼공">
+<meta property="article:tag" content="혼공S">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/02/19/hongong-s-06/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jonghwanyoon.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/blue_whale.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">jonghwanyoon</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Seoul, South Korea</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <!-- 
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13px;">Hexo</a> <a href="/tags/%ED%98%BC%EA%B3%B5/" style="font-size: 13px;">혼공</a> <a href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" style="font-size: 13px;">혼공학습단</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/hongong-9th-summary/" class="title">혼공학습단 9기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T11:54:43.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Hexo/">Hexo</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/11/hexo_embed_html/" class="title">Hexo에서 HTML 파일을 Markdown에 삽입하기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-11T13:15:35.000Z" itemprop="datePublished">2023-01-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hongong-s-06" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL | Stored Procedure 및 Python 연결
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/02/19/hongong-s-06/" class="article-date">
+	  <time datetime="2023-02-19T04:31:51.000Z" itemprop="datePublished">2023-02-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/19/hongong-s-06/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><br><br></p>
+<p>SQL에서 사용되는 스토어드 프로시져에 대해 정리하는 글입니다. 추가로 파이썬도 사용해보아요.</p>
+<br>
+<p><strong>목차</strong></p>
+<ol>
+<li>데이터베이스와 SQL</li>
+<li>SQL 미리 맛보기</li>
+<li>SQL 기본 문법</li>
+<li>SQL 고급 문법</li>
+<li>테이블과 뷰</li>
+<li>인덱스</li>
+<li><strong>스토어드 프로시져</strong> ⬅</li>
+<li><strong>SQL과 파이썬 연결</strong> ⬅</li>
+</ol>
+<br>
+<h2 id="스토어드-프로시저supstored-proceduresup"><a class="markdownIt-Anchor" href="#스토어드-프로시저supstored-proceduresup"></a> 스토어드 프로시저<sup>Stored procedure</sup></h2>
+<p>스토어드 프로시저는 SQL에 프로그래밍 기능을 추가해 사용할 수 있습니다.</p>
+<p>기본 구조는 다음과 같습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> Stored_Procedure_Name( <span class="keyword">IN</span> 혹은 <span class="keyword">OUT</span> 파라미터)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">-- SQL 프로그래밍 기입</span></span><br><span class="line"><span class="keyword">END</span> $$ </span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CALL</span> Stored_Procedure_Name(); <span class="comment">-- 호출</span></span><br></pre></td></tr></table></figure>
+<br>
+<ul>
+<li>
+<p>스토어드 프로시저 삭제 <code>DROP PROCEDURE Stored_Procedure_Name;</code></p>
+</li>
+<li>
+<p>Input 파라미터 지정 형식: <code>IN 입력_매개변수_이름 데이터_형식</code><br>파라미터 입력: <code>CALL 프로시저이름(전달_값);</code></p>
+</li>
+<li>
+<p>Output 파라미터 지정 형식: <code>OUT 출력_매개변수_이름 데이터_형식</code><br>변수 지정: <code>CALL 프로시저이름(@변수_명);</code><br>변수 출력: <code>SELECT @변수_명;</code></p>
+</li>
+<li>
+<p>날짜와 관련된 함수</p>
+<ul>
+<li>YEAR, MONTH, DAY는 날짜 데이터 타입에서 연, 월, 일을 구해줍니다.</li>
+<li>CURDATE() 는 현재 날짜를 알려줍니다. YEAR, MONTH, DAY를 CURDATE와 같이 사용하면 현재 연, 월, 일을 얻을 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p>동적 SQL은 SQL을 생성하고 <strong>PREPARE</strong>과 <strong>EXECUTE</strong>로 사용합니다</p>
+</li>
+</ul>
+<p><br><br></p>
+<h2 id="스토어드-함수supstored-functionsup"><a class="markdownIt-Anchor" href="#스토어드-함수supstored-functionsup"></a> 스토어드 함수<sup>Stored function</sup></h2>
+<ul>
+<li>내장 함수 외에 직접 함수를 만들 수 있습니다.</li>
+<li>스토어드 프로시저와 비슷하지만, 용도가 다르고 <strong>RETURNS</strong> 예약어로 값을 반환합니다</li>
+</ul>
+<p>기본 형식은 다음과 같습니다</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> 스토어드_함수_이름(파라미터)</span><br><span class="line">    <span class="keyword">RETURNS</span> 반환형식</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">-- SQL 프로그래밍</span></span><br><span class="line">    <span class="keyword">RETURN</span> 반환값;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> 스토어드_함수_이름();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CREATE FUNCTION 하위의 RETURNS에서 반환 형식을 지정합니다.</li>
+<li>파라미터는 모두 인풋입니다. IN을 따로 붙이지 않습니다.</li>
+<li>SELECT로 호출합니다.</li>
+<li>함수 내에서 SELECT를 사용할 수 없습니다.</li>
+</ul>
+<br>
+<p><strong>예시</strong></p>
+<p>데뷔 연도를 입력하면 활동기간이 얼마나 되었는지 출력해주는 함수입니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> calcYearFunc(dYear <span class="type">INT</span>)</span><br><span class="line">    <span class="keyword">RETURNS</span> <span class="type">INT</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment">-- SQL 프로그래밍</span></span><br><span class="line">    <span class="keyword">DECLARE</span> runYear <span class="type">INT</span>;</span><br><span class="line">    <span class="keyword">SET</span> runYear <span class="operator">=</span> <span class="keyword">YEAR</span>(CURDATE()) <span class="operator">-</span> dYear;</span><br><span class="line">    <span class="keyword">RETURN</span> runYear;</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>사용 예시</strong></p>
+<p>그대로 출력할 수도 있고, SELECT ~ INTO 를 이용해 변수에 저장해 사용할 수도 있습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> calcYearFunc(<span class="number">2010</span>) <span class="keyword">AS</span> <span class="string">&#x27;활동 햇수&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> calcYearFunc(<span class="number">2007</span>) <span class="keyword">INTO</span> <span class="variable">@debut2007</span>;</span><br><span class="line"><span class="keyword">SELECT</span> calcYearFunc(<span class="number">2013</span>) <span class="keyword">INTO</span> <span class="variable">@debut2013</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="variable">@debut2007</span><span class="operator">-</span><span class="variable">@debut2013</span> <span class="keyword">AS</span> <span class="string">&#x27;2007과 2013 차이&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<br>
+<blockquote>
+<p>삭제할 때에는 <code>DROP FUNCTION 함수이름;</code>을 사용합니다.</p>
+</blockquote>
+<p><br><br></p>
+<h2 id="커서supcursorsup"><a class="markdownIt-Anchor" href="#커서supcursorsup"></a> 커서<sup>cursor</sup></h2>
+<ul>
+<li>커서는 테이블에서 한 row씩 처리하기 위한 방식입니다.</li>
+<li>첫 번째 행부터 마지막 행까지 하나씩 접근해서 값을 처리합니다.</li>
+</ul>
+<p><strong>실습</strong></p>
+<ul>
+<li>회원의 평균 인원수를 구하는 스토어드 프로시저를 만들어 실습해보겠습니다.</li>
+<li>실습을 위해 커서로 한 row씩 접근해서 인원수를 누적시켜봅니다.</li>
+</ul>
+<p><strong>1. 사용할 변수 준비하기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> memNumber <span class="type">INT</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> cnt <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> totNumber <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> endOfRow <span class="type">BOOLEAN</span> <span class="keyword">DEFAULT</span> <span class="literal">FALSE</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>endOfRow는 row의 끝을 확인하기 위한 변수입니다.</li>
+</ul>
+<br>
+<p><strong>2. 커서 선언하기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> memberCursor <span class="keyword">CURSOR</span> <span class="keyword">FOR</span></span><br><span class="line">    <span class="keyword">SELECT</span> mem_number <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>커서라는 것은 결국 SELECT문입니다.</li>
+</ul>
+<br>
+<p><strong>3. 반복 조건 선언하기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> CONTINUE HANDLER</span><br><span class="line">    <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> endOfRow <span class="operator">=</span> <span class="literal">TRUE</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>row가 끝까지 가면 반복을 종료할 수 있도록 조건을 성정합니다.</li>
+</ul>
+<br>
+<p><strong>4. 커서 열기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">OPEN</span> memberCursor;</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>5. 행 반복하기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cursor_loop: LOOP</span><br><span class="line">    <span class="keyword">FETCH</span> memberCursor <span class="keyword">INTO</span> memNumber;</span><br><span class="line"></span><br><span class="line">    IF endOfRow <span class="keyword">THEN</span></span><br><span class="line">        LEAVE cursor_loop;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">SET</span> cnt <span class="operator">=</span> cnt <span class="operator">+</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">SET</span> totNumber <span class="operator">=</span> totNumber <span class="operator">+</span> memNumber;</span><br><span class="line"><span class="keyword">END</span> LOOP cursor_loop;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>FETCH는 한 row씩 읽습니다.</li>
+<li>LEAVE는 반복을 빠져나갑니다.</li>
+</ul>
+<br>
+<p>데이터 확인하기</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> (totNumner<span class="operator">/</span>cnt) <span class="keyword">AS</span> <span class="string">&#x27;회원의 평균 인원 수&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>6. 커서 닫기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CLOSE</span> memberCursor;</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h2 id="트리거suptriggersup"><a class="markdownIt-Anchor" href="#트리거suptriggersup"></a> 트리거<sup>Trigger</sup></h2>
+<ul>
+<li>DML<sup>Data manipulation language</sup>문 (INSERT, UPDATE, DELETE)이 발생하면 자동으로 실행되는 프로그래밍 기능입니다.</li>
+<li>테이블에 미리 부착 (attach) 해놓으면 작동하는 코드입니다.</li>
+<li>BEFORE 트리거와 AFTER 트리거로 나뉩니다. 보통은 AFTER를 사용하므로, 여기서는 AFTER에 대해서만 설명합니다.</li>
+</ul>
+<p>그러면 실습을 해보겠습니다.</p>
+<br>
+<p><strong>테이블 만들기</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> singer (<span class="keyword">SELECT</span> mem_id, mem_name, mem_number, addr <span class="keyword">FROM</span> <span class="keyword">member</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> backup_singer</span><br><span class="line">	(	mem_id		<span class="type">CHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">		mem_name	<span class="type">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">		mem_number	<span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">        addr		<span class="type">CHAR</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">        modType		<span class="type">CHAR</span>(<span class="number">2</span>),</span><br><span class="line">        modDate		<span class="type">DATE</span>,</span><br><span class="line">        modUser		<span class="type">VARCHAR</span>(<span class="number">30</span>)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> backup_singer</span><br><span class="line">	(	mem_id		<span class="type">CHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">		mem_name	<span class="type">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">		mem_number	<span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">        addr		<span class="type">CHAR</span>(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">        modType		<span class="type">CHAR</span>(<span class="number">2</span>),</span><br><span class="line">        modDate		<span class="type">DATE</span>,</span><br><span class="line">        modUser		<span class="type">VARCHAR</span>(<span class="number">30</span>)</span><br><span class="line">	);</span><br></pre></td></tr></table></figure>
+<p>backup_singer 테이블은 처음에는 row가 존재하지 않습니다.</p>
+<p><br><br></p>
+<p><strong>트리거 작성하기</strong></p>
+<p>singer 테이블에 Update와 Delete가 발생하면 backup_singer 테이블에 <strong>수정</strong> 혹은 <strong>삭제</strong>로 로그를 남기게 됩니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- UPDATE 트리거</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> singer_updateTrg;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> singer_updateTrg</span><br><span class="line">	AFTER <span class="keyword">UPDATE</span></span><br><span class="line">    <span class="keyword">ON</span> singer</span><br><span class="line">    <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> backup_singer <span class="keyword">VALUES</span>(OLD.mem_id, OLD.mem_name,</span><br><span class="line">		OLD.mem_number, OLD.addr, &quot;수정&quot;, CURDATE(), <span class="built_in">CURRENT_USER</span>() );</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- DELETE 트리거</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> IF <span class="keyword">EXISTS</span> singer_deleteTrg;</span><br><span class="line">DELIMITER $$</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> singer_deleteTrg</span><br><span class="line">	AFTER <span class="keyword">DELETE</span></span><br><span class="line">    <span class="keyword">ON</span> singer</span><br><span class="line">    <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> backup_singer <span class="keyword">VALUES</span>(OLD.mem_id, OLD.mem_name,</span><br><span class="line">		OLD.mem_number, OLD.addr, &quot;삭제&quot;, CURDATE(), <span class="built_in">CURRENT_USER</span>() );</span><br><span class="line"><span class="keyword">END</span> $$</span><br><span class="line">DELIMITER ;</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p><strong>테이블 데이터 변경하기</strong></p>
+<ul>
+<li>그룹이 BLK 멤버의 주소지를 영국으로 바꾸었습니다.</li>
+<li>멤버가 7 이상인 그룹을 삭제하였습니다.</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> singer <span class="keyword">SET</span> addr <span class="operator">=</span> <span class="string">&#x27;영국&#x27;</span> <span class="keyword">WHERE</span> mem_id <span class="operator">=</span> <span class="string">&#x27;BLK&#x27;</span>;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> singer <span class="keyword">WHERE</span> mem_number <span class="operator">&gt;=</span> <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⭐️참고 - <strong>Safe mode 해제하기.</strong><br />
+여러 행을 바꿀 때, safe mode가 활성화되어 있다면 아래의 문구가 뜹니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error Code: <span class="number">1175.</span> You <span class="keyword">are</span> <span class="keyword">using</span> safe <span class="keyword">update</span> mode <span class="keyword">and</span> you tried <span class="keyword">to</span> <span class="keyword">update</span> a <span class="keyword">table</span> <span class="keyword">without</span> a <span class="keyword">WHERE</span> that uses a KEY column.  <span class="keyword">To</span> disable safe mode, toggle the option <span class="keyword">in</span> Preferences <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">SQL</span> Editor <span class="keyword">and</span> reconnect.</span><br></pre></td></tr></table></figure>
+<br>
+<p>이를 해제하려면 다음의 Query를 실행해주면 됩니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> SQL_SAFE_UPDATES <span class="operator">=</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<br>
+<p>두 테이블의 결과를 확인해봅시다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> singer;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> backup_singer;</span><br></pre></td></tr></table></figure>
+<p>singer 테이블<br />
+<img src=/images/hongong_s_06_fig2.png></p>
+<br>
+<p>backup_singer 테이블<br />
+<img src=/images/hongong_s_06_fig1.png></p>
+<br>
+<p>singer 테이블의 데이터를 성공적으로 변경하고 삭제하였습니다. 트리거에 지정한대로 backup_singer 테이블에도 기록이 남는 것을 확인하였습니다</p>
+<p><br><br></p>
+<h2 id="sql과-python-연결하기"><a class="markdownIt-Anchor" href="#sql과-python-연결하기"></a> SQL과 Python 연결하기</h2>
+<ul>
+<li>Python은 유명한 프로그래밍 언어이고 과학, 분석, 개발 등에서 사용됩니다. (정보는 너무나 많으므로 언어에 대한 별도의 설명은 하지 않겠습니다)</li>
+<li>python의 pymysql 라이브러리를 이용해봅니다.</li>
+</ul>
+<p><strong>DB 연결하기</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">conn = pymysql.connect(host = <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">                       user = <span class="string">&quot;root&quot;</span>,</span><br><span class="line">                       password = password,</span><br><span class="line">                       db = <span class="string">&quot;soloDB&quot;</span>,</span><br><span class="line">                       charset = <span class="string">&quot;utf8&quot;</span>)</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>커서 생성하기</strong></p>
+<p>연결된 데이터베이스에 SQL문을 실행하고 결과를 받으려면 커서가 필요합니다. 커서는 다음처럼 정의가능합니다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cur = conn.cursor()</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>데이터 조회하기</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&quot;SELECT * FROM soloDB.userTable&quot;</span>) <span class="comment"># 성공하면 1을 Return합니다</span></span><br><span class="line">result = cur.fetchall() <span class="comment"># execute의 결과를 반환합니다.</span></span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># ((&#x27;내 ID&#x27;, &#x27;내 이름&#x27;, &#x27;이메일@naver.com&#x27;, 1991),)</span></span><br></pre></td></tr></table></figure>
+<p>이런식으로, cur.execute를 이용하면 SQL문을 전송하면서 지금까지 배워왔던 SQL 명령이 모두 가능합니다.</p>
+<p><br><br></p>
+<h3 id="sql과-gui-연동하기"><a class="markdownIt-Anchor" href="#sql과-gui-연동하기"></a> SQL과 GUI 연동하기</h3>
+<ul>
+<li>pymysql과 tkinter를 이용해 GUI프로그램을 만들고 mysql과 연동하여 입력,조회를 해보았습니다.</li>
+<li>코드는 길어질 수 있으므로, 다음의 강의를 참고해주세요.</li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gCeSU3ByGVs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><br><br></p>
+<p><strong>실습 결과</strong></p>
+<img src=/images/hongong_s_06_fig3.gif>
+<p><br><br></p>
+<p>오늘은 스토어드 프로시저와 Python과 연결에 대해 알아보았습니다.</p>
+<p>읽어주셔서 감사합니다 👋</p>
+<p><br><br><br><br></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jonghwanyoon.github.io/2023/02/19/hongong-s-06/" title="SQL | Stored Procedure 및 Python 연결" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/02/19/hongong-s-06/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote> -->
+<!-- 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jonghwanyoon.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/blue_whale.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jonghwanyoon.github.io/" target="_blank"><span class="text-dark">jonghwanyoon</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+ -->
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Jonghwan Yoon
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+            Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://jonghwanyoon.github.io/2023/02/19/hongong-s-06/';
+        
+        this.page.identifier = 'hongong-s-06';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wg-yoon' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140384355-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

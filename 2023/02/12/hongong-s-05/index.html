@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="naver-site-verification" content="29892ce904ec6054137e0bb84d2f2197d1eb56f4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SQL | 인덱스 살펴보기 | jonghwanyoon</title><meta name="robots" content="noindex">
+  <meta name="description" content="SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 ⬅ 스토어드 프로시져 SQL과 파이썬 연결    인덱스 개념   인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 찾아보기와 같습니다. 하지만 문제점도 존재합니다. 예를 들어, S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL | 인덱스 살펴보기">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/index.html">
+<meta property="og:site_name" content="Jonghwan Yoon">
+<meta property="og:description" content="SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 ⬅ 스토어드 프로시져 SQL과 파이썬 연결    인덱스 개념   인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 찾아보기와 같습니다. 하지만 문제점도 존재합니다. 예를 들어, S">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-02-12T03:56:14.000Z">
+<meta property="article:modified_time" content="2023-07-03T12:13:08.969Z">
+<meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="혼공학습단">
+<meta property="article:tag" content="혼공">
+<meta property="article:tag" content="혼공S">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jonghwanyoon.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/blue_whale.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">jonghwanyoon</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Seoul, South Korea</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <!-- 
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13px;">Hexo</a> <a href="/tags/%ED%98%BC%EA%B3%B5/" style="font-size: 13px;">혼공</a> <a href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" style="font-size: 13px;">혼공학습단</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/01/hongong-9th-summary/" class="title">혼공학습단 9기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-01T11:54:43.000Z" itemprop="datePublished">2023-07-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Hexo/">Hexo</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/01/11/hexo_embed_html/" class="title">Hexo에서 HTML 파일을 Markdown에 삽입하기</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-01-11T13:15:35.000Z" itemprop="datePublished">2023-01-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hongong-s-05" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SQL | 인덱스 살펴보기
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/02/12/hongong-s-05/" class="article-date">
+	  <time datetime="2023-02-12T03:56:14.000Z" itemprop="datePublished">2023-02-12</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/12/hongong-s-05/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><br><br></p>
+<p>SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.</p>
+<br>
+<p><strong>목차</strong></p>
+<ol>
+<li>데이터베이스와 SQL</li>
+<li>SQL 미리 맛보기</li>
+<li>SQL 기본 문법</li>
+<li>SQL 고급 문법</li>
+<li>테이블과 뷰</li>
+<li><strong>인덱스</strong> ⬅</li>
+<li>스토어드 프로시져</li>
+<li>SQL과 파이썬 연결</li>
+</ol>
+<p><br><br></p>
+<h1 id="인덱스-개념"><a class="markdownIt-Anchor" href="#인덱스-개념"></a> 인덱스 개념</h1>
+<br>
+<ul>
+<li>인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 <strong>찾아보기</strong>와 같습니다.</li>
+<li>하지만 문제점도 존재합니다. 예를 들어, <code>SELECT</code>는 SQL 책 전반에 존재하는데, 찾아보기에 모든 위치를 표시한다면 비효율 적일 수 있습니다.</li>
+<li>따라서, 입력될 데이터의 형태와 구조를 파악하여 인덱스를 필요한 곳에 사용할 수 있어야합니다.</li>
+</ul>
+<br>
+<p><strong>장점</strong></p>
+<ul>
+<li>SELECT 문으로 검색하는 속도가 빨라짐.</li>
+<li>컴퓨팅 리소스가 줄어듦.</li>
+</ul>
+<br>
+<p><strong>단점</strong></p>
+<ul>
+<li>추가적인 공간을 차지함. (테이블 크기의 약 10%정도)</li>
+<li>처음 생성시 시간이 오래 걸림.</li>
+<li>테이블의 데이터가 변경되면 성능이 나빠질 수 있음.</li>
+</ul>
+<br>
+<h3 id="인덱스-종류"><a class="markdownIt-Anchor" href="#인덱스-종류"></a> 인덱스 종류</h3>
+<ul>
+<li>클러스터형 인덱스<sup>clustered index</sup></li>
+<li>보조 인덱스<sup>secondary index</sup></li>
+</ul>
+<br>
+<p>인덱스 확인은 SHOW INDEX FROM [테이블 명]; 으로 가능합니다. 간단한 예를 보겠습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table1 (</span><br><span class="line">    col1 <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    col2 <span class="type">INT</span> <span class="keyword">UNIQUE</span>,</span><br><span class="line">    col3 <span class="type">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> table1;</span><br></pre></td></tr></table></figure>
+<img src=/images/hongong_s_05_fig1.png>
+<ul>
+<li>Key_name: PRIMARY는 <strong>자동으로 생성된 인덱스</strong> 라는 의미이고, <strong>클러스터형 인덱스</strong>입니다.</li>
+<li>Column_name: col1 열에 인덱스가 생성되어 있습니다.</li>
+<li>Non_unique: 고유하지 않음을 0 (False), 1 (True)로 나타냅니다.</li>
+</ul>
+<br>
+<h4 id="primary-key"><a class="markdownIt-Anchor" href="#primary-key"></a> PRIMARY KEY</h4>
+<ul>
+<li>PRIMARY KEY 가 지정되면 해당 열에 <strong>자동으로 인덱스가 생성</strong>되며, 클러스터형 인덱스 입니다.</li>
+<li><strong>자동으로 순서대로 정렬</strong>됩니다. (중간에 row가 추가되어도요)</li>
+<li>PRIMARY KEY가 변경되면 인덱스를 다시 생성합니다. 데이터 양에 따라 소요시간이 길어질 수 있습니다.</li>
+<li>기본적으로 UNIQUE입니다. (중복되지 않습니다)</li>
+</ul>
+<br>
+<h4 id="unique"><a class="markdownIt-Anchor" href="#unique"></a> UNIQUE</h4>
+<ul>
+<li>UNIQUE로 지정하면 값이 중복되지 않고 <strong>보조 인덱스</strong>로 지정됩니다.</li>
+<li>별도 공간에 인덱스를 생성합니다.</li>
+<li>데이터는 바뀌지 않습니다.</li>
+</ul>
+<br>
+<h1 id="인덱스-내부-작동"><a class="markdownIt-Anchor" href="#인덱스-내부-작동"></a> 인덱스 내부 작동</h1>
+<p>클러스터형 인덱스가 빠르게 찾는 원리에 대해 알아봅시다.</p>
+<p>예를 들어, 아래에 정렬된 데이터의 배열이 있습니다.</p>
+<br>
+<img  width=600px src=/images/hongong_s_05_fig2.png>
+<p><br><br></p>
+<p>배열에서 7이라는 숫자를 찾으려면 어떻게 해야할까요?</p>
+<br>
+<p>우리는 그림으로 그려서 딱 보이지만 컴퓨터는 배열내 원소를 바로 찾지 못합니다. 각 데이터를 조회 해야합니다.</p>
+<p>가장 쉬운 방법은 1부터 하나씩 하나씩 조회해 보는 것입니다.</p>
+<p><code>1, 2, 3 , .. , 7</code> 이런 식으로요. 7번의 조회를 해야합니다.</p>
+<blockquote>
+<p>수행 횟수는 Big O 개념으로 시간 복잡도로 나타낼 수 있고, 여기서는 $ O(7) $ 입니다.</p>
+</blockquote>
+<br>
+<p>하지만 이런식으로 찾으면 어떨까요?</p>
+<p><br><br></p>
+<img width=600px src=/images/hongong_s_05_fig3.png>
+<p><br><br></p>
+<p>7을 찾았습니다. 7번 조회해야하는 일을 3번만에 수행하였습니다. -&gt; $ O(3) $</p>
+<p>이것이 가능한 이유는 배열이 정렬되어 있었고, 가운데 원소의 위치를 미리 알고 있었기 때문입니다.</p>
+<p>인덱스로 지정된 컬럼이 자동으로 정렬되는 이유도 같습니다.</p>
+<br>
+<p>클러스터형 인덱스, 보조 인덱스는 모두 <strong>균형 트리</strong><sup>Balanced Tree, B-Tree</sup>로 만들어집니다.</p>
+<p>균형트리는 위 그림의 배열을 트리 형태로 만든 것입니다.</p>
+<p>SQL에서는 조금 형태가 다릅니다. 아래 그림을 보시죠.</p>
+<br>
+<img width=600px src=/images/hongong_s_05_fig4.png>
+<p><br><br></p>
+<p>가장 처음은 루트<sup>Root</sup>, 중간<sup>Internal</sup>, 리프<sup>Leaf</sup> 노드로 나누어집니다.</p>
+<p>트리의 노드는 MySQL에서는 <strong>페이지 (page)</strong> 라고 부릅니다.</p>
+<p>페이지에는 여러개의 값이 들어 갈 수 있습니다. 하지만 원리는 바로 전에 보여드린 그림과 비슷합니다.</p>
+<br>
+<p>7을 찾는 과정은 아래와 같습니다.</p>
+<p><code>루트 페이지의 1 -&gt; 루트 페이지의 7 -&gt; 중간 페이지의 7 -&gt; 리프 페이지의 7</code></p>
+<p>4번의 조회로 찾았고, 페이지는 3번 조회를 하였습니다. SQL에서 데이터의 수를 조회하는 것보다 페이지의 조회 횟수로 효율성을 판단합니다.</p>
+<p>그리고, 값이 <strong>추가</strong>된다면 페이지가 새로 생성될 수도 있습니다. 15가 추가된다면, 중간 페이지 내 12의 하위 페이지에는 자리가 없으므로 중간 페이지에 15가 추가되고 리프 페이지가 새로 생성됩니다.</p>
+<br>
+<p>보조 인덱스 (Secondary Index)는 데이터를 변경하지 않고, 데이터의 위치를 알려주는 역할을 합니다.</p>
+<p>하지만, 보조 인덱스의 인덱스 페이지 내에서는 데이터가 정렬되어 있습니다. 그리고 말단 노드에는 데이터의 위치가 <strong>페이지 번호+#위치</strong> 로 나타납니다. 책 부록의 찾아보기와 같습니다.</p>
+<p>위치만 나타나 있으므로, 보조 인덱스를 활용하면 데이터에 두 번 접근하게됩니다. 하지만 그냥 찾을때 보다는 훨씬 빠릅니다.</p>
+<p>추가로,</p>
+<blockquote>
+<p>페이지는 하나당 16KB의 공간이 필요합니다.<br />
+Primary Key로 데이터를 조회하면 소요되는 비용은 $ O(log{N}) $입니다.<br>보조 인덱스로 데이터를 조회하면 소요되는 비용은 $ O(2*log{N}) $ 입니다.</p>
+</blockquote>
+<p><br><br></p>
+<h1 id="인덱스-실제-사용"><a class="markdownIt-Anchor" href="#인덱스-실제-사용"></a> 인덱스 실제 사용</h1>
+<br>
+<p><strong>인덱스 생성</strong></p>
+<p>테이블을 생성할 때, 인덱스를 설정할 수 있지만 따로 설정할 수 있습니다.</p>
+<p>기본 문법은 아래와 같습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX 인덱스_이름</span><br><span class="line">    <span class="keyword">ON</span> 테이블_이름 (열_이름) [<span class="keyword">ASC</span> <span class="operator">|</span> <span class="keyword">DESC</span>]</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>인덱스 제거</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX 인덱스_이름 <span class="keyword">ON</span> 테이블_이름</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>실습</strong></p>
+<p><code>member</code> 테이블의 형태는 다음과 같습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
+<img width=600px src=/images/hongong_s_05_fig5.png>
+<p><br><br></p>
+<p>member 테이블의 인덱스는 다음과 같이 구성되어 있습니다. 최초 생성때 mem_id에 PRIMARY KEY를 지정하여 PRIMARY로 지정되어 있습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
+<img width=600px src=/images/hongong_s_05_fig6.png>
+<p><br><br></p>
+<p>테이블의 STATUS는 다음처름 확인할 수 있습니다.</p>
+<ul>
+<li>페이지는 하나당 16KB를 차지하므로 Data_length에 16384 가 지정되어 있습니다.</li>
+<li>Index_length는 보조 인덱스의 크기입니다. 아직 보조인덱스가 없으므로 크기가 0입니다.</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;member&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<img width=600px src=/images/hongong_s_05_fig7.png>
+<p><br><br></p>
+<p><code>addr</code> 열을 보조인덱스로 지정해봅시다.여기서는 중복을 허용하는 <strong>단순 보조 인덱스</strong>를 추가하겠습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idex_member_addr</span><br><span class="line">	<span class="keyword">ON</span> <span class="keyword">member</span> (addr);</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p>⭐️ 생성한 인덱스를 적용시키려면 <code>ANALYZE TABLE</code>을 이용해 테이블을 분석/처리 해주어야 합니다.</p>
+<p>아래 결과에서 Index_length에 1페이지 크기가 늘어난 것을 확인할 수 있습니다. 보조 인덱스가 1개이므로 1페이지가 생성되었습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE <span class="keyword">TABLE</span> <span class="keyword">member</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;member&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<img width=600px src=/images/hongong_s_05_fig8.png>
+<p><br><br></p>
+<p><strong>참고</strong></p>
+<ul>
+<li>MySQL에서는 <code>Executation Plan</code> 탭이 실행결과 오른쪽에 위치해 있습니다. 테이블 검색의 비용을 확인 할 수 있습니다.</li>
+<li>SELECT로만 조회하면 인덱스를 사용하지 않습니다. WHERE같은 조건이 입력되어야 인덱스를 사용합니다.</li>
+<li>WHERE 에 연산이 추가되면 인덱스를 사용하지 않습니다. 예, <code>WHERE mem_number*2 &gt;= 14</code></li>
+</ul>
+<br>
+<h2 id="인덱스를-효과적으로-사용하는-방법"><a class="markdownIt-Anchor" href="#인덱스를-효과적으로-사용하는-방법"></a> 인덱스를 효과적으로 사용하는 방법</h2>
+<ul>
+<li>인덱스는 열 단위에 생성됩니다.</li>
+<li>WHERE 절에서 사용되는 열에 인덱스를 만들어야합니다.</li>
+<li>WHERE 절에 사용되더라도 자주 사용되어야 가치가 있습니다.</li>
+<li>데이터의 중복이 많은 열은 인덱스를 만들어도 효과가 없습니다.</li>
+<li>클러스터형 인덱스는 테이블당 하나만 생성할 수 있습니다.</li>
+<li>사용하지 않는 인덱스는 제거해야 합니다.</li>
+</ul>
+<p><br><br></p>
+<p>오늘은 SQL의 핵심 개체인 인덱스에 대해 정리하였습니다.</p>
+<p>다음에는 Stored Procedure에 대해 정리하고, 파이썬과 연동을 해보겠습니다.</p>
+<p>읽어주셔서 감사합니다 👋</p>
+<p><br><br><br><br></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/" title="SQL | 인덱스 살펴보기" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote> -->
+<!-- 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jonghwanyoon.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/blue_whale.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jonghwanyoon.github.io/" target="_blank"><span class="text-dark">jonghwanyoon</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+ -->
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Jonghwan Yoon
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+            Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/';
+        
+        this.page.identifier = 'hongong-s-05';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wg-yoon' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140384355-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
