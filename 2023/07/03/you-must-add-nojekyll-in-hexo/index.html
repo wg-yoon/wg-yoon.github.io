@@ -18,21 +18,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Hexo에서 HTML 파일을 Markdown에 삽입하기 | jonghwanyoon</title>
-  <meta name="description" content="Hexo에서 HTML 파일을 삽입하려 했는데 다음처럼 문제가 발생했습니다.    iframe 안에 새로운 블로그가 펼쳐진다..!  원래는 단순 그래프만 보여야 하는데, HTML을 또 렌더링해서 테마 안에 그래프가 속하게 표시됩니다. 이러한 문제를 피하면서 HTML 파일을 넣는 순서는 다음과 같습니다.   1. 우선 마크다운에 HTML파일을 넣는 코드를 삽">
+  <title>Hexo에서 Github pages의 deploy fail시 .nojekyll을 추가하자. | jonghwanyoon</title>
+  <meta name="description" content="나는 블로그를 Hexo를 이용해 관리한다. 오랜만에 블로그 글 정리하고 진행하는데, deploy가 실패했다.     왜...?    가장 먼저 나타난 에러 문구 1234TypeError: Converting circular structure to JSON    --&gt; starting at object with constructor &amp;#x27;TLSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo에서 HTML 파일을 Markdown에 삽입하기">
-<meta property="og:url" content="https://jonghwanyoon.github.io/2023/01/11/hexo_embed_html/index.html">
+<meta property="og:title" content="Hexo에서 Github pages의 deploy fail시 .nojekyll을 추가하자.">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/07/03/you-must-add-nojekyll-in-hexo/index.html">
 <meta property="og:site_name" content="Jonghwan Yoon">
-<meta property="og:description" content="Hexo에서 HTML 파일을 삽입하려 했는데 다음처럼 문제가 발생했습니다.    iframe 안에 새로운 블로그가 펼쳐진다..!  원래는 단순 그래프만 보여야 하는데, HTML을 또 렌더링해서 테마 안에 그래프가 속하게 표시됩니다. 이러한 문제를 피하면서 HTML 파일을 넣는 순서는 다음과 같습니다.   1. 우선 마크다운에 HTML파일을 넣는 코드를 삽">
+<meta property="og:description" content="나는 블로그를 Hexo를 이용해 관리한다. 오랜만에 블로그 글 정리하고 진행하는데, deploy가 실패했다.     왜...?    가장 먼저 나타난 에러 문구 1234TypeError: Converting circular structure to JSON    --&gt; starting at object with constructor &amp;#x27;TLSS">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-01-11T13:15:35.000Z">
-<meta property="article:modified_time" content="2023-07-03T12:43:18.290Z">
+<meta property="article:published_time" content="2023-07-03T13:29:13.000Z">
+<meta property="article:modified_time" content="2023-07-03T13:45:54.603Z">
 <meta property="article:author" content="Jonghwan Yoon">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/01/11/hexo_embed_html/index.html">
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/07/03/you-must-add-nojekyll-in-hexo/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
   
@@ -251,14 +251,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-hexo_embed_html" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-you-must-add-nojekyll-in-hexo" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo에서 HTML 파일을 Markdown에 삽입하기
+      Hexo에서 Github pages의 deploy fail시 .nojekyll을 추가하자.
     </h1>
   
 
@@ -266,8 +266,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/01/11/hexo_embed_html/" class="article-date">
-	  <time datetime="2023-01-11T13:15:35.000Z" itemprop="datePublished">2023-01-11</time>
+	<a href="/2023/07/03/you-must-add-nojekyll-in-hexo/" class="article-date">
+	  <time datetime="2023-07-03T13:29:13.000Z" itemprop="datePublished">2023-07-03</time>
 	</a>
 </span>
         
@@ -285,50 +285,52 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/01/11/hexo_embed_html/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/07/03/you-must-add-nojekyll-in-hexo/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <p><br><br></p>
-<p>Hexo에서 HTML 파일을 삽입하려 했는데 다음처럼 문제가 발생했습니다.</p>
+<p>나는 블로그를 Hexo를 이용해 관리한다.</p>
+<p>오랜만에 블로그 글 정리하고 진행하는데, deploy가 실패했다.</p>
 <p><br><br></p>
-<iframe src="/html_render/test.html" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<center>
+<img width=600px src=/images/nojekyll_deploy_failure.png>
 <br>
-<center><font style="color:gray;">iframe 안에 새로운 블로그가 펼쳐진다..!</font></center>
+<font color=gray>왜...?<br></font>
+</center>
 <p><br><br></p>
-<p>원래는 단순 그래프만 보여야 하는데, HTML을 또 렌더링해서 테마 안에 그래프가 속하게 표시됩니다.</p>
-<p>이러한 문제를 피하면서 HTML 파일을 넣는 순서는 다음과 같습니다.</p>
+<br>
+가장 먼저 나타난 에러 문구
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">TypeError:</span> <span class="string">Converting</span> <span class="string">circular</span> <span class="string">structure</span> <span class="string">to</span> <span class="string">JSON</span></span><br><span class="line">    <span class="string">--&gt;</span> <span class="string">starting</span> <span class="string">at</span> <span class="string">object</span> <span class="string">with</span> <span class="string">constructor</span> <span class="string">&#x27;TLSSocket&#x27;</span></span><br><span class="line">    <span class="string">|</span>     <span class="string">property</span> <span class="string">&#x27;_httpMessage&#x27;</span> <span class="string">-&gt;</span> <span class="string">object</span> <span class="string">with</span> <span class="string">constructor</span> <span class="string">&#x27;ClientRequest&#x27;</span></span><br><span class="line">    <span class="string">---</span> <span class="string">property</span> <span class="string">&#x27;socket&#x27;</span> <span class="string">closes</span> <span class="string">the</span> <span class="string">circle</span></span><br></pre></td></tr></table></figure>
 <p><br><br></p>
-<h2 id="1-우선-마크다운에-html파일을-넣는-코드를-삽입합니다"><a class="markdownIt-Anchor" href="#1-우선-마크다운에-html파일을-넣는-코드를-삽입합니다"></a> 1. 우선 마크다운에 HTML파일을 넣는 코드를 삽입합니다.</h2>
-<p>삽입하는 방법은 직접 iframe HTML 태그로 넣어주거나 Hexo 의 Tag Library를 이용하면 됩니다.</p>
-<p>HTML iframe 태그로 넣어주기</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">100%</span> <span class="attr">height</span>=<span class="string">500px</span> <span class="attr">src</span>=<span class="string">url</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>잘 모르는 상태에서 이 에러에 대해 열심히 찾아보았으나, 아주 쉬운 해결책을 발견했다.</p>
+<p>이 사태의 원인은 hexo의 _config.yml을 보고 github에서 &quot;이거 jekyll이네~&quot;라고 인식하여 jekyll처럼 배포하려다 에러가 난다.</p>
+<p>따라서, github에 jekyll이 아니다 라는것을 알려주는 것으로 root에 “.nojekyll”라는 빈 파일을 추가해야한다.</p>
+<p>해당 Github 답변 링크는 다음과 같다: <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/3212">Github Issue</a></p>
+<p><br><br></p>
+<p>해결하려면 단순한 configuration이 필요하다. <a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration.html">Configuration | Hexo</a></p>
+<p>_config.yml에서 include 하위에 “.nojekyll”을 추가해준다.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">include:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&quot;.nojekyll&quot;</span></span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<center>
+<img width=600px src=/images/nojekyll_deploy_success.png>
 <br>
-<p>Hexo의 Tag library 이용하기</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% iframe url [width] [height] %&#125;</span><br></pre></td></tr></table></figure>
+<font color=gray>Deploy가 된다.<br></font>
+</center>
+<p><br><br></p>
+<p>예전에는 잘 되던게 안되니 이해가 되지 않아서 시간을 꽤 소비했다.</p>
 <br>
-<h2 id="2-_configyml-에-skip_render-추가하기"><a class="markdownIt-Anchor" href="#2-_configyml-에-skip_render-추가하기"></a> 2. _config.yml 에 skip_render 추가하기</h2>
-<p>HTML이나 json을 추가 시, 추가 렌더링을 하지 않도록 Hexo의 <code>_config.yml</code>에 <code>skip_render</code>를 추가해줍니다.</p>
-<p>theme의 config가 아닌 블로그 경로에있는 <code>_config.yml</code>입니다.</p>
-<p>저는 <code>source/html</code> 하위에 HTML 파일을 두고 관리할 예정이므로 아래처럼 지정해 주었습니다. 사용하시는 구조에 맞추어 변경하시면 됩니다.</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">html/*.html</span></span><br></pre></td></tr></table></figure>
-<br>
-<h2 id="3-페이지-확인하기"><a class="markdownIt-Anchor" href="#3-페이지-확인하기"></a> 3. 페이지 확인하기</h2>
-<p><code>hexo s</code>를 실행하여 페이지를 다시 확인해보시면 됩니다. 인터넷에서는 여기서 해결된 분이 있는데 저는 안되서 다음 과정도 진행했습니다.</p>
-<br>
-<h2 id="3-dbjson-삭제하기"><a class="markdownIt-Anchor" href="#3-dbjson-삭제하기"></a> 3. db.json 삭제하기</h2>
-<p>블로그 경로 내에 있는 <code>db.json</code>을 삭제해야 합니다.</p>
-<blockquote>
-<p>혹시 모르니 복사하고 테스트하시길 바랍니다.</p>
-</blockquote>
-<p>페이지 정보를 담은 파일인데, hexo가 해당 파일을 제대로 초기화 해주지 않습니다.</p>
-<p>삭제를 해주면 알아서 현재 상태에 맞추어 갱신을 해줍니다.</p>
-<br>
-<h2 id="4-진짜-페이지-확인"><a class="markdownIt-Anchor" href="#4-진짜-페이지-확인"></a> 4. 진짜 페이지 확인</h2>
-<p>다시 <code>hexo s</code>를 실행해 보니 아래처럼 HTML 파일이 잘 삽입되는 것을 확인 할 수 있습니다.</p>
-<iframe src="/html/test.html" width="100%" height="550" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>갑자기 이런 현상이 나타나게한 나의 행동을 추측해보면…</p>
+<ul>
+<li>WSL 버전을 1과 2를 몇 번 왔다갔다 해서.</li>
+<li>npm에서 업데이트 몇 가지를 했기 때문.</li>
+</ul>
+<p>정도일 것 같다.</p>
+<p><br><br></p>
+<p>그냥 두려다가 왠지 나중에 기억안나서 고생할까봐 + 필요하신 분이 있으실까봐 정리한다.</p>
+<p><br><br></p>
 
       
     </div>
@@ -338,7 +340,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jonghwanyoon.github.io/2023/01/11/hexo_embed_html/" title="Hexo에서 HTML 파일을 Markdown에 삽입하기" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/01/11/hexo_embed_html/</a>
+      <a href="https://jonghwanyoon.github.io/2023/07/03/you-must-add-nojekyll-in-hexo/" title="Hexo에서 Github pages의 deploy fail시 .nojekyll을 추가하자." target="_blank" rel="external">https://jonghwanyoon.github.io/2023/07/03/you-must-add-nojekyll-in-hexo/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -386,10 +388,10 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2023/03/09/hongong-9th-summary/" title="혼공학습단 9기"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
     
+    <li class="next">
+      <a href="/2023/03/09/hongong-9th-summary/" title="혼공학습단 9기"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
   </ul>
@@ -472,9 +474,9 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     <script defer>
     var disqus_config = function () {
         
-            this.page.url = 'https://jonghwanyoon.github.io/2023/01/11/hexo_embed_html/';
+            this.page.url = 'https://jonghwanyoon.github.io/2023/07/03/you-must-add-nojekyll-in-hexo/';
         
-        this.page.identifier = 'hexo_embed_html';
+        this.page.identifier = 'you-must-add-nojekyll-in-hexo';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
