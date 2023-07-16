@@ -27,7 +27,7 @@
 <meta property="og:description" content="프로그래밍 언어의 기본적인 문법인 변수와 연산 종류에 대해 정리합니다. 기본 문법이므로 조금 딱딱할 수 있습니다.   변수  변수 선언 방법  변수명은 메모리에 붙이는 임시 주소와 같습니다. 변수를 선언하면 메모리에 저장 공간이 생깁니다.  처음 값은 알 수 없다. 컴퓨터 메모리는 재활용되기 때문. 프로그램이 종료되면 메모리 공간을 반납하고 새 프로그램이">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-16T10:50:41.000Z">
-<meta property="article:modified_time" content="2023-07-16T11:15:26.428Z">
+<meta property="article:modified_time" content="2023-07-16T12:22:57.886Z">
 <meta property="article:author" content="Jonghwan Yoon">
 <meta property="article:tag" content="혼공학습단">
 <meta property="article:tag" content="혼공">
@@ -434,6 +434,40 @@
 <h3 id="문자와-문자열-입력"><a class="markdownIt-Anchor" href="#문자와-문자열-입력"></a> 문자와 문자열 입력</h3>
 <p>문자열은 char 배열에 %s를 사용해 입력하는데, 변수에 &amp;를 붙이지 않는다.⭐</p>
 <p>또한 공백 없이 나란히 입력해야한다.</p>
+<h2 id="중간-확인"><a class="markdownIt-Anchor" href="#중간-확인"></a> 중간 확인</h2>
+<p>그러면 문제 몇가지를 풀어서 확인을 해보겠습니다.</p>
+<br>
+<p><strong>1. 아래 변수를 이용한 scanf 사용법 중 맞은 것 골라보기.</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> ch;</span><br><span class="line"><span class="type">short</span> sh;</span><br><span class="line"><span class="type">int</span> in;</span><br><span class="line"><span class="type">float</span> ft;</span><br><span class="line"><span class="type">double</span> db;</span><br></pre></td></tr></table></figure>
+<p>1️⃣ <code>scanf(&quot;%d&quot;, &amp;ch);</code><br />
+2️⃣ <code>scanf(&quot;%d&quot;, &amp;sh);</code><br />
+3️⃣ <code>scanf(&quot;%d%f&quot;, &amp;in, &amp;ft);</code><br />
+4️⃣ <code>scanf(&quot;%f&quot;, &amp;db);</code></p>
+<br>
+<p><strong>2. 다음 빈칸 채워보기</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> fruit[<span class="number">20</span>];</span><br><span class="line">    <span class="type">int</span> cnt;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;좋아하는 과일 : &quot;</span> );</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, <span class="comment">/* 1️⃣ */</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;몇 개 : &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, <span class="comment">/* 2️⃣ */</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s를 %d개 드립니다.&quot;</span>, fruit, cnt);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>실행결과</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">좋아하는 과일 : 망고</span><br><span class="line">몇 개 : 3</span><br><span class="line">망고를 3개 드립니다.</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>3. 실행예시를 보고 코드를 작성해보기</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> ch;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;문자 입력: &quot;</span>);    </span><br><span class="line">    <span class="comment">// INPUT area</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>실행 결과 1.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">문자 입력: A</span><br><span class="line">A문자의 아스키코드 값은 65입니다.</span><br></pre></td></tr></table></figure>
+<p>실행 결과 2.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">문자 입력: t</span><br><span class="line">t문자의 아스키코드 값은 116입니다.</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p>…</p>
+<p><br><br></p>
+<p><strong>정답</strong></p>
+<p>1번</p>
+<p>3️⃣</p>
+<br>
+<p>2번</p>
+<p>1️⃣ <code>fruit</code><br />
+2️⃣ <code>&amp;cnt</code></p>
+<br>
+<p>3번</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;ch);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c문자의 아스키코드 값은 %d입니다.\n&quot;</span>, ch, ch);</span><br></pre></td></tr></table></figure>
 <p><br><br></p>
 <h1 id="연산자"><a class="markdownIt-Anchor" href="#연산자"></a> 연산자</h1>
 <h2 id="1-산술-연산자-관계-연산자-논리-연산자"><a class="markdownIt-Anchor" href="#1-산술-연산자-관계-연산자-논리-연산자"></a> 1. 산술 연산자, 관계 연산자, 논리 연산자</h2>
@@ -589,6 +623,45 @@
 <code>00010</code>  10 &gt;&gt; 2 == 2</p>
 </li>
 </ul>
+<br>
+<h2 id="중간-확인-2"><a class="markdownIt-Anchor" href="#중간-확인-2"></a> 중간 확인</h2>
+<p>그러면 문제 몇가지를 풀어서 확인을 해보겠습니다.</p>
+<p><strong>1. short와 long의 자료형 크기를 비교하여 출력하는 코드 작성</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> res;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1️⃣ </span></span><br><span class="line">    <span class="comment">// sizeof의 피연산자로 자료형 이름을 사용해 크기를 바이트 단위로 계산</span></span><br><span class="line">    <span class="comment">// short형의 크기가 long형보다 크면 참이므로 , 그렇지 않으면 0을 res에 저장</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2️⃣</span></span><br><span class="line">    <span class="comment">// res가 1 과 같으면 short형의 크기가 크므로 출력하고 그렇지 않으면 long을 출력한다.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>2. 야구장 경기장 좌석수가 70개고 입장객수가 65명일 때 입장률을 표시하는 코드 작성</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// inpui area</span></span><br><span class="line">    <span class="comment">// seats, audience, rate로 변수를 지정하고 비율을 소수점 1개로 출력해보자.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>3. 3.76시간이 몇 시, 몇 분, 몇 초인지 출력하는 코드 작성</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> hour, min, sec;</span><br><span class="line">    <span class="type">double</span> time = <span class="number">3.76</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//input area</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>실행결과</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.76</span>시간은 <span class="number">3</span>시간 <span class="number">45</span>분 <span class="number">35</span>초입니다.</span><br></pre></td></tr></table></figure>
+<br>
+<p><strong>도전문제</strong></p>
+<p>체중 (kg), 키(cm)를 입력하면 BMI를 계산하여 체중관리 조언을 하는 프로그램 작성.</p>
+<ul>
+<li>BMI가 20이상 25미만이면 “표준입니다” 출력.</li>
+<li>그 외에는 “체중 관리가 필요합니다” 출력</li>
+<li>BMI: 몸무게 / (키의 제곱)</li>
+</ul>
+<p>실행 결과</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">몸무게(kg)와 키(cm) 입력 : <span class="number">66</span> <span class="number">185.6</span></span><br><span class="line">체중관리가 필요합니다</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p>…</p>
+<p><br><br></p>
+<h3 id="정답"><a class="markdownIt-Anchor" href="#정답"></a> 정답</h3>
+<p>1번</p>
+<p>1️⃣ <code>res = sizeof (short) &gt; sizeof (long);</code><br />
+2️⃣ <code>printf(&quot;%s\n&quot;, (res==1) ? &quot;short&quot; : &quot;long&quot;);</code></p>
+<br>
+<p>2번</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> seats = <span class="number">70</span>;</span><br><span class="line"><span class="type">int</span> audience = <span class="number">65</span>;</span><br><span class="line"><span class="type">double</span> rate;</span><br><span class="line">rate = (<span class="type">double</span>) audience / (<span class="type">double</span>) seats * <span class="number">100.0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;입장률 : %.1f%%\n&quot;</span>, rate);</span><br></pre></td></tr></table></figure>
+<br>
+<p>3번</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hour = (<span class="type">int</span>) time;</span><br><span class="line">time -= hour;</span><br><span class="line">time *= <span class="number">60</span>;</span><br><span class="line">min = (<span class="type">int</span>) time;</span><br><span class="line">time -= min;</span><br><span class="line">time *= <span class="number">60</span>;</span><br><span class="line">sec = (<span class="type">int</span>) time;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;3.76시간은 %d시간 %d분 %d초입니다.&quot;</span>, hour, min, sec);</span><br></pre></td></tr></table></figure>
+<p><strong>도전문제</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> weight;</span><br><span class="line">    <span class="type">double</span> height;</span><br><span class="line">    <span class="type">double</span> bmi;</span><br><span class="line">    <span class="type">char</span> res[<span class="number">20</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;몸무게(kg)와 키(cm) 입력 : &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf&quot;</span>, &amp;weight, &amp;height);</span><br><span class="line">    </span><br><span class="line">    height /= <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    bmi = weight / (height * height);</span><br><span class="line">    <span class="built_in">printf</span>((bmi &gt;= <span class="number">20</span> &amp;&amp; bmi &lt; <span class="number">25</span>) ? <span class="string">&quot;표준입니다\n&quot;</span> : <span class="string">&quot;체중관리가 필요합니다\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
 <p>오늘은 C언어의 변수와 연산자에 관해 정리해 보았습니다.</p>
 <p>읽어주셔서 감사합니다. 👋</p>
 <p><br><br><br><br></p>
