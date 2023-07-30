@@ -27,7 +27,7 @@
 <meta property="og:description" content="함수를 만들기 위한 3가지  함수 정의: 실제 코드 구현 함수 호출: 함수 사용 함수 선언: 사용할 함수에 대해 컴파일러에 정보를 주기    함수 정의 함수를 만들 때에는 이름, 필요한 데이터, 수행의 결과를 생각해야합니다. 각각의 결과가 함수의 prototype이 되고, 이를 토대로 함수를 정의하게 됩니다. 구조는 아래와 같습니다.  1반환명 함수명(매">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-30T07:56:37.000Z">
-<meta property="article:modified_time" content="2023-07-30T08:42:29.907Z">
+<meta property="article:modified_time" content="2023-07-30T14:25:45.703Z">
 <meta property="article:author" content="Jonghwan Yoon">
 <meta property="article:tag" content="혼공학습단">
 <meta property="article:tag" content="혼공">
@@ -383,15 +383,17 @@
 <p>재귀 호출 (recursive call) 함수는 자기 자신을 호출하는 함수를 의미합니다.</p>
 <p>아래 코드는 apple을 출력하는 fruit함수를 재귀적으로 호출합니다.</p>
 <br>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    fruit();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;apple\n&quot;</span>);</span><br><span class="line">    fruit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">Segmentation fault (core dumped)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    fruit();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;apple\n&quot;</span>);</span><br><span class="line">    fruit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <br>
-<p>결과는 수많은 apple을 stdout으로 출력하고 stderr로 Segmentation fault를 출력합니다.</p>
+<center><img src=/images/hongong_c_04_fig2.png width=350px></center>
+<br>
+<p>결과는 수많은 <code>apple</code>을 stdout으로 출력하고  <code>Segmentation fault (core dumped)</code>를 stderr로 출력합니다.</p>
 <br>
 <blockquote>
 <p><b>왜 중단되었을까?</b></p>
-<p>재귀함수를 call하는 stack에는 제한이 있고, OS별로 다릅니다.<br />
-함수의 call마다 stack 영역에 정보를 저장하는데, 제한을 넘기면 중단이되며 이 상황을 stack overflow라고 합니다.<br />
-이 코드에서도 stack 영역을 모두 사용하였으므로, Segmentation fault가 발생합니다.</p>
+<p>재귀함수를 call하는 stack에는 제한이 있습니다.<br />
+함수의 call마다 stack 영역에 정보를 저장하는데, 제한을 넘기면 중단이되며 이 상황을 <code>stack overflow</code>라고 합니다.<br />
+이 코드에서도 stack 영역을 모두 사용하였으므로, <code>Segmentation fault</code>가 발생합니다.</p>
 <p>다음 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stack_overflow">링크</a>를 참고</p>
 </blockquote>
 <br>
@@ -601,20 +603,5 @@ ga('send', 'pageview');
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
