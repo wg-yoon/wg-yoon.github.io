@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="naver-site-verification" content="29892ce904ec6054137e0bb84d2f2197d1eb56f4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>혼자 공부하는 C - 함수 | jonghwanyoon</title>
+  <meta name="description" content="함수를 만들기 위한 3가지  함수 정의: 실제 코드 구현 함수 호출: 함수 사용 함수 선언: 사용할 함수에 대해 컴파일러에 정보를 주기    함수 정의 함수를 만들 때에는 이름, 필요한 데이터, 수행의 결과를 생각해야합니다. 각각의 결과가 함수의 prototype이 되고, 이를 토대로 함수를 정의하게 됩니다. 구조는 아래와 같습니다.  1반환명 함수명(매">
+<meta property="og:type" content="article">
+<meta property="og:title" content="혼자 공부하는 C - 함수">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/07/30/hongong-c-04/index.html">
+<meta property="og:site_name" content="Jonghwan Yoon">
+<meta property="og:description" content="함수를 만들기 위한 3가지  함수 정의: 실제 코드 구현 함수 호출: 함수 사용 함수 선언: 사용할 함수에 대해 컴파일러에 정보를 주기    함수 정의 함수를 만들 때에는 이름, 필요한 데이터, 수행의 결과를 생각해야합니다. 각각의 결과가 함수의 prototype이 되고, 이를 토대로 함수를 정의하게 됩니다. 구조는 아래와 같습니다.  1반환명 함수명(매">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-07-30T07:56:37.000Z">
+<meta property="article:modified_time" content="2023-07-30T08:38:35.331Z">
+<meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="혼공학습단">
+<meta property="article:tag" content="혼공">
+<meta property="article:tag" content="혼공C">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/07/30/hongong-c-04/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://jonghwanyoon.github.io/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/blue_whale.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">jonghwanyoon</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Seoul, South Korea</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      <!-- 
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+ -->
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%B1%85/">책</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%B1%85/%ED%98%BC%EC%9E%90-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/">혼자 공부하는 시리즈</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 13.5px;">Hexo</a> <a href="/tags/%EB%A6%AC%EB%B7%B0/" style="font-size: 13px;">리뷰</a> <a href="/tags/%EC%B1%85/" style="font-size: 13.5px;">책</a> <a href="/tags/%EC%BD%94%EB%94%A9-%EC%9D%B8%ED%84%B0%EB%B7%B0/" style="font-size: 13px;">코딩 인터뷰</a> <a href="/tags/%ED%98%BC%EA%B3%B5/" style="font-size: 14px;">혼공</a> <a href="/tags/%ED%98%BC%EA%B3%B5C/" style="font-size: 13.5px;">혼공C</a> <a href="/tags/%ED%98%BC%EA%B3%B5S/" style="font-size: 13px;">혼공S</a> <a href="/tags/%ED%98%BC%EA%B3%B5%EB%A8%B8%EC%8B%A0/" style="font-size: 13px;">혼공머신</a> <a href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" style="font-size: 14px;">혼공학습단</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/30/hongong-c-04/" class="title">혼자 공부하는 C - 함수</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-30T07:56:37.000Z" itemprop="datePublished">2023-07-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%EC%B1%85/">책</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/13/book-cracking-the-coding-interview/" class="title">(책) 코딩 인터뷰 완전분석</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-13T11:50:00.000Z" itemprop="datePublished">2023-07-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Hexo/">Hexo</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/03/you-must-add-nojekyll-in-hexo/" class="title">Hexo에서 Github pages의 deploy fail시 .nojekyll을 추가하자.</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-03T13:29:13.000Z" itemprop="datePublished">2023-07-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%EC%B1%85/">책</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%EC%B1%85/%ED%98%BC%EC%9E%90-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/">혼자 공부하는 시리즈</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/07/03/hongong-10th-summary/" class="title">(책) 혼자 공부하는 C언어 정리</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-07-02T15:00:00.000Z" itemprop="datePublished">2023-07-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%EC%B1%85/">책</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%EC%B1%85/%ED%98%BC%EC%9E%90-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/">혼자 공부하는 시리즈</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/09/hongong-9th-summary/" class="title">(책) 혼자 공부하는 ML/DL, SQL 정리</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-09T11:54:43.000Z" itemprop="datePublished">2023-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hongong-c-04" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      혼자 공부하는 C - 함수
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/07/30/hongong-c-04/" class="article-date">
+	  <time datetime="2023-07-30T07:56:37.000Z" itemprop="datePublished">2023-07-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/">혼공학습단</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5C/" rel="tag">혼공C</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/07/30/hongong-c-04/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><br><br><br></p>
+<p>함수를 만들기 위한 3가지</p>
+<ul>
+<li>함수 정의: 실제 코드 구현</li>
+<li>함수 호출: 함수 사용</li>
+<li>함수 선언: 사용할 함수에 대해 컴파일러에 정보를 주기</li>
+</ul>
+<p><br><br></p>
+<h3 id="함수-정의"><a class="markdownIt-Anchor" href="#함수-정의"></a> 함수 정의</h3>
+<p>함수를 만들 때에는 <strong>이름</strong>, <strong>필요한 데이터</strong>, <strong>수행의 결과</strong>를 생각해야합니다. 각각의 결과가 함수의 prototype이 되고, 이를 토대로 함수를 정의하게 됩니다.</p>
+<p>구조는 아래와 같습니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">반환명 함수명(매개변수);</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<p>예시</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span>; <span class="comment">// 함수 선언</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 함수 호출</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> <span class="comment">// 함수 정의</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (x + y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<br>
+<p>참고로, 함수 내에서 변수를 정의가 가능하며 Local variable로 지정되므로, 다른 함수에서의 변수와 이름을 같게 하여도 독립적으로 지정됩니다.</p>
+<p><br><br></p>
+<h3 id="함수-선언"><a class="markdownIt-Anchor" href="#함수-선언"></a> 함수 선언</h3>
+<p>함수 정의를 하는데 함수 선언이 필요한 이유는 무엇일까요?</p>
+<p>컴파일러가 함수를 인식할 수 있도록 알리는 역할을 합니다.</p>
+<br>
+<p>필요한 이유는 다음과 같습니다.</p>
+<ol>
+<li>함수 선언에서 반환값의 형태를 확인합니다.
+<ul>
+<li>함수를 선언하면 반환값을 알 수 있고 컴파일러 호출 전에 미리 알릴 수 있습니다.</li>
+<li>함수 호출 전에 함수 정의를 하였다면, 선언을 하지 않아도 괜찮습니다.</li>
+<li>하지만, 코드가 길어지고 여러 함수가 존재하면 함수 간에 호출관계가 엉킬 수 있고, 순서에 맞게 정의하는게 쉽지 않으므로, 함수 선언은 main 전에 모두 하고, 함수 정의는 main 하위에 작성하는 것이 좋습니다.</li>
+</ul>
+</li>
+<li>함수 호출 형식에 문제가 없는지 검사합니다.
+<ul>
+<li>함수 선언에는 반환 값과 파라미터의 data type이 정의되어 있으므로, 함수 사용시 데이터를 알맞게 주었는지 미리 확인이 가능합니다.</li>
+</ul>
+</li>
+</ol>
+<p><br><br></p>
+<h3 id="매개변수가-없는-함수"><a class="markdownIt-Anchor" href="#매개변수가-없는-함수"></a> 매개변수가 없는 함수</h3>
+<p>매개 변수가 없는 경우는 매개변수에 void를 입력하여 없음을 표시합니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">반환명 함수명(<span class="type">void</span>);</span><br></pre></td></tr></table></figure>
+<br>
+<blockquote>
+<p>void가 없어도 매개변수가 없다는 사실을 표시할 수 있으나, void를 입력하여 명시적으로 표현하는 것이 좋습니다.</p>
+</blockquote>
+<p><br><br></p>
+<h3 id="반환값이-없는-함수"><a class="markdownIt-Anchor" href="#반환값이-없는-함수"></a> 반환값이 없는 함수</h3>
+<p>함수는 기능에 따라 형태가 결정되며, 반환값이 필요 없는 함수도 있습니다<br />
+예) 화면에 print만 하는 함수 등</p>
+<p>이 경우 반환값에 void를 입력하여 반환값이 없음을 표시합니다. 또한 함수 정의에서 return에 아무것도 없이 작성합니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> 함수명(매개변수); <span class="comment">// 선언</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> 함수명(매개변수) <span class="comment">// 정의</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// do something</span></span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br><br></p>
+<h3 id="재귀호출-함수"><a class="markdownIt-Anchor" href="#재귀호출-함수"></a> 재귀호출 함수</h3>
+<p>재귀 호출 (recursive call) 함수는 자기 자신을 호출하는 함수를 의미합니다.</p>
+<p>아래 코드는 apple을 출력하는 fruit함수를 재귀적으로 호출합니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    fruit();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fruit</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;apple\n&quot;</span>);</span><br><span class="line">    fruit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">...</span></span><br><span class="line"><span class="comment">apple</span></span><br><span class="line"><span class="comment">Segmentation fault (core dumped)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<br>
+<p>결과는 수많은 apple을 stdout으로 출력하고 stderr로 Segmentation fault를 출력합니다.</p>
+<br>
+<blockquote>
+<p><b>왜 중단되었을까?</b></p>
+<p>재귀함수를 call하는 stack에는 제한이 있고, OS별로 다릅니다.<br />
+함수의 call마다 stack 영역에 정보를 저장하는데, 제한을 넘기면 중단이되며 이 상황을 stack overflow라고 합니다.<br />
+이 코드에서도 stack 영역을 모두 사용하였으므로, Segmentation fault가 발생합니다.</p>
+<p>다음 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stack_overflow">링크</a>를 참고</p>
+</blockquote>
+<br>
+<p>이러한 중단은 정상적인 상황이 아니므로, 재귀함수에서는 탈출할 수 있는 조건식을 항상 염두하여 작성하여야 합니다.</p>
+<p><br><br><br></p>
+<p>번외</p>
+<h3 id="재귀-함수를-이용한-피보나치-수열-구현해보기"><a class="markdownIt-Anchor" href="#재귀-함수를-이용한-피보나치-수열-구현해보기"></a> 재귀 함수를 이용한 피보나치 수열 구현해보기</h3>
+<p>피보나치 수열은 앞 2개의 값을 더한 값이 현재 원소의 값이 되는 수열입니다.</p>
+<p>0 1 1 2 3 5 8 13 21 …</p>
+<br>
+<h4 id="1-재귀-함수를-이용한-구현"><a class="markdownIt-Anchor" href="#1-재귀-함수를-이용한-구현"></a> 1. 재귀 함수를 이용한 구현</h4>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fibo</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span>(n)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fibo(n<span class="number">-1</span>) + fibo(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p>주어진 값에 대해 하위 n-1과 n-2의 값을 재귀함수로 호출하는 함수입니다.</p>
+<br>
+이 코드의 단점은 중복된 계산이 존재하는데,
+<br>
+<center><img src=/images/hongong_c_04_fig1.png width=150px></center>
+<br>
+<p>n을 5라고 하면 3은 두번 실행됩니다.</p>
+<p>Tree의 2아래는 안적었지만, fibo(2)도 fibo(0) + fibo(1) 이므로 Tree의 높이는 항상 n과 같으며, 이 재귀함수의 속도는 $ O(2^n) $이 됩니다.</p>
+<p>따라서, 결과를 미리 저장하는 메모이제이션을 추가하면 다음처럼 구현할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> memo[<span class="number">100</span>] <span class="comment">// 초깃값이 모두 0인 array </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fibo_memo</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span>(n)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (memo[n] != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> memo[n];</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        memo[n] = fibo_memo(n<span class="number">-1</span>) + fibo_memo(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> memo[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>값을 저장하면서 있으면 바로 return을 하기 때문에 시간은 O(n)이 됩니다.</p>
+<p>하면서 알게 된 점</p>
+<ul>
+<li>C에는 default parameter가 없다.</li>
+<li>dictionary나 Hashmap은 직접 구현해야한다.</li>
+</ul>
+<p><br><br></p>
+<h4 id="2-static-변수를-사용한-재귀함수"><a class="markdownIt-Anchor" href="#2-static-변수를-사용한-재귀함수"></a> 2. static 변수를 사용한 재귀함수</h4>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fibo_static</span><span class="params">(<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> first = <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> second = <span class="number">1</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> current = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> current;</span><br><span class="line"></span><br><span class="line">    current = first + second;</span><br><span class="line">    first = second;</span><br><span class="line">    second = current;</span><br><span class="line">    <span class="keyword">return</span> fibo_static(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p>하면서 알게된 점</p>
+<ul>
+<li>static 변수</li>
+</ul>
+<p>static 변수는 추후 393 페이지에서 언급됩니다.</p>
+<p>static 변수는 프로그램이 끝날 때 까지 메모리에서 사라지지 않으며, 한번 초기화 하면 재초기화가 되지 않습니다.</p>
+<p>따라서, 함수 내에 초기화하는 Line이 있음에도 초기화 되지 않고, 직접 지정한 값으로 이어져 재귀적으로 실행이 됩니다.</p>
+<p><br><br></p>
+<p>오늘은 C언어의 함수에 대해서 정리해보았습니다.</p>
+<p>읽어주셔서 감사합니다👋👋</p>
+<p><br><br><br><br></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <!-- <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jonghwanyoon.github.io/2023/07/30/hongong-c-04/" title="혼자 공부하는 C - 함수" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/07/30/hongong-c-04/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote> -->
+<!-- 
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://jonghwanyoon.github.io/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/blue_whale.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://jonghwanyoon.github.io/" target="_blank"><span class="text-dark">jonghwanyoon</span><small class="ml-1x"></small></a></h3>
+        <div></div>
+      </div>
+    </figure>
+  </div>
+</div>
+ -->
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/07/13/book-cracking-the-coding-interview/" title="(책) 코딩 인터뷰 완전분석"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jonghwanyoon" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="https://www.linkedin.com/in/jonghwan-yoon" target="_blank" title="Linkedin" data-toggle=tooltip data-placement=top><i class="icon icon-linkedin"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2023 Jonghwan Yoon
+        
+        <div class="publishby">
+        	<!-- Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>. -->
+            Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+    <script defer>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://jonghwanyoon.github.io/2023/07/30/hongong-c-04/';
+        
+        this.page.identifier = 'hongong-c-04';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wg-yoon' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+
+
+    <script defer type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-140384355-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
