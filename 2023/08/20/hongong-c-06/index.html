@@ -18,23 +18,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>SQL | 인덱스 살펴보기 | jonghwanyoon</title><meta name="robots" content="noindex">
-  <meta name="description" content="SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 ⬅ 스토어드 프로시져 SQL과 파이썬 연결    인덱스 개념   인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 찾아보기와 같습니다. 하지만 문제점도 존재합니다. 예를 들어, S">
+  <title>혼자 공부하는 C - 포인터 | jonghwanyoon</title>
+  <meta name="description" content="포인터의 기본 개념   메모리의 주소 프로그램에서는 데이터를 메모리에 저장하는데, 메모리에서 어디에 저장되었는지는 주소를 이용해 알 수 있습니다. 메모리의 위치는 바이트 단위이며 0부터 시작합니다. int 형은 4바이트 이므로 변수에 값을 저장하면, 메모리의 4 바이트가 할당되게 됩니다. 주소값은 OS나 메모링 사용 현황에 따라 다르게 배정됩니다. 예를">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL | 인덱스 살펴보기">
-<meta property="og:url" content="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/index.html">
+<meta property="og:title" content="혼자 공부하는 C - 포인터">
+<meta property="og:url" content="https://jonghwanyoon.github.io/2023/08/20/hongong-c-06/index.html">
 <meta property="og:site_name" content="Jonghwan Yoon">
-<meta property="og:description" content="SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.  목차  데이터베이스와 SQL SQL 미리 맛보기 SQL 기본 문법 SQL 고급 문법 테이블과 뷰 인덱스 ⬅ 스토어드 프로시져 SQL과 파이썬 연결    인덱스 개념   인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 찾아보기와 같습니다. 하지만 문제점도 존재합니다. 예를 들어, S">
+<meta property="og:description" content="포인터의 기본 개념   메모리의 주소 프로그램에서는 데이터를 메모리에 저장하는데, 메모리에서 어디에 저장되었는지는 주소를 이용해 알 수 있습니다. 메모리의 위치는 바이트 단위이며 0부터 시작합니다. int 형은 4바이트 이므로 변수에 값을 저장하면, 메모리의 4 바이트가 할당되게 됩니다. 주소값은 OS나 메모링 사용 현황에 따라 다르게 배정됩니다. 예를">
 <meta property="og:locale">
-<meta property="article:published_time" content="2023-02-12T03:56:14.000Z">
-<meta property="article:modified_time" content="2023-07-03T12:13:08.969Z">
+<meta property="article:published_time" content="2023-08-20T06:48:32.000Z">
+<meta property="article:modified_time" content="2023-08-20T06:49:58.351Z">
 <meta property="article:author" content="Jonghwan Yoon">
 <meta property="article:tag" content="혼공학습단">
 <meta property="article:tag" content="혼공">
-<meta property="article:tag" content="혼공S">
+<meta property="article:tag" content="혼공C">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/index.html">
+  <link rel="canonical" href="https://jonghwanyoon.github.io/2023/08/20/hongong-c-06/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Jonghwan Yoon" type="application/atom+xml">
   
@@ -283,14 +283,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-hongong-s-05" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-hongong-c-06" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      SQL | 인덱스 살펴보기
+      혼자 공부하는 C - 포인터
     </h1>
   
 
@@ -298,8 +298,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/02/12/hongong-s-05/" class="article-date">
-	  <time datetime="2023-02-12T03:56:14.000Z" itemprop="datePublished">2023-02-12</time>
+	<a href="/2023/08/20/hongong-c-06/" class="article-date">
+	  <time datetime="2023-08-20T06:48:32.000Z" itemprop="datePublished">2023-08-20</time>
 	</a>
 </span>
         
@@ -311,188 +311,82 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5S/" rel="tag">혼공S</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
+	<a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5/" rel="tag">혼공</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5C/" rel="tag">혼공C</a>, <a class="article-tag-link-link" href="/tags/%ED%98%BC%EA%B3%B5%ED%95%99%EC%8A%B5%EB%8B%A8/" rel="tag">혼공학습단</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/12/hongong-s-05/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/08/20/hongong-c-06/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <p><br><br></p>
-<p>SQL에서 사용되는 인덱스에 대해 정리하는 글입니다.</p>
+<h2 id="포인터의-기본-개념"><a class="markdownIt-Anchor" href="#포인터의-기본-개념"></a> 포인터의 기본 개념</h2>
 <br>
-<p><strong>목차</strong></p>
-<ol>
-<li>데이터베이스와 SQL</li>
-<li>SQL 미리 맛보기</li>
-<li>SQL 기본 문법</li>
-<li>SQL 고급 문법</li>
-<li>테이블과 뷰</li>
-<li><strong>인덱스</strong> ⬅</li>
-<li>스토어드 프로시져</li>
-<li>SQL과 파이썬 연결</li>
-</ol>
-<p><br><br></p>
-<h1 id="인덱스-개념"><a class="markdownIt-Anchor" href="#인덱스-개념"></a> 인덱스 개념</h1>
+<h3 id="메모리의-주소"><a class="markdownIt-Anchor" href="#메모리의-주소"></a> 메모리의 주소</h3>
+<p>프로그램에서는 데이터를 메모리에 저장하는데, 메모리에서 어디에 저장되었는지는 주소를 이용해 알 수 있습니다. 메모리의 위치는 바이트 단위이며 0부터 시작합니다.</p>
+<p>int 형은 4바이트 이므로 변수에 값을 저장하면, 메모리의 4 바이트가 할당되게 됩니다. 주소값은 OS나 메모링 사용 현황에 따라 다르게 배정됩니다.</p>
+<p>예를 들어, int a를 지정했고 메모리에서 100 번지에 배정되었다면 100, 101, 102, 103 은 a가 할당된 영역이 됩니다.</p>
 <br>
+<h3 id="주소-연산자"><a class="markdownIt-Anchor" href="#주소-연산자"></a> 주소 연산자</h3>
+<p>변수의 주소는 &amp;를 사용해 구할 수 있습니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%u\n&quot;</span>, &amp;a); <span class="comment">// a의 주소를 10진수로 출력</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;a); <span class="comment">// a의 주소를 16진수로 출력</span></span><br></pre></td></tr></table></figure>
+<br>
+<h3 id="포인터와-간접-참조-연산자"><a class="markdownIt-Anchor" href="#포인터와-간접-참조-연산자"></a> 포인터와 간접 참조 연산자</h3>
+<p>포인터는 변수의 메모리 주소를 저장하는 변수입니다. 선언할 변수명 앞에 *를 붙여서 선언합니다.</p>
+<p>*는 포인터임을 표시하는 기호이며, 간접 참조 연산자 혹은 포인터 연산자 라고 합니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="type">int</span> *pa; <span class="comment">// 자료형 *변수명;</span></span><br><span class="line">pa = &amp;a; <span class="comment">// pa에 a의 주소를 대입함. pa가 a를 가리킴. pa -&gt; a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">포인터 변수를 *와 함께 사용하면 가리키는 변수의 데이터에 접근한다.</span></span><br><span class="line"><span class="comment">따라서 가리키는 변수의 값을 포인터 변수에서 대입할 수 있고, a의 값도 바뀐다. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">*pa = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<br>
+<p>포인터 변수 *pa를 대입연산자의</p>
 <ul>
-<li>인덱스는 원하는 위치를 빠르게 탐색할 수 있습니다. 책을 예로 들면 <strong>찾아보기</strong>와 같습니다.</li>
-<li>하지만 문제점도 존재합니다. 예를 들어, <code>SELECT</code>는 SQL 책 전반에 존재하는데, 찾아보기에 모든 위치를 표시한다면 비효율 적일 수 있습니다.</li>
-<li>따라서, 입력될 데이터의 형태와 구조를 파악하여 인덱스를 필요한 곳에 사용할 수 있어야합니다.</li>
+<li>왼쪽에 위치하면 pa가 가리키는 변수의 저장공간으로 사용됩니다. → l-value</li>
+<li>오른쪽에 위치하면 pa가 가리키는 변수의 값으로 사용됩니다. → r-value</li>
 </ul>
 <br>
-<p><strong>장점</strong></p>
-<ul>
-<li>SELECT 문으로 검색하는 속도가 빨라짐.</li>
-<li>컴퓨팅 리소스가 줄어듦.</li>
-</ul>
-<br>
-<p><strong>단점</strong></p>
-<ul>
-<li>추가적인 공간을 차지함. (테이블 크기의 약 10%정도)</li>
-<li>처음 생성시 시간이 오래 걸림.</li>
-<li>테이블의 데이터가 변경되면 성능이 나빠질 수 있음.</li>
-</ul>
-<br>
-<h3 id="인덱스-종류"><a class="markdownIt-Anchor" href="#인덱스-종류"></a> 인덱스 종류</h3>
-<ul>
-<li>클러스터형 인덱스<sup>clustered index</sup></li>
-<li>보조 인덱스<sup>secondary index</sup></li>
-</ul>
-<br>
-<p>인덱스 확인은 SHOW INDEX FROM [테이블 명]; 으로 가능합니다. 간단한 예를 보겠습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> table1 (</span><br><span class="line">    col1 <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    col2 <span class="type">INT</span> <span class="keyword">UNIQUE</span>,</span><br><span class="line">    col3 <span class="type">INT</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> table1;</span><br></pre></td></tr></table></figure>
-<img src=/images/hongong_s_05_fig1.png>
-<ul>
-<li>Key_name: PRIMARY는 <strong>자동으로 생성된 인덱스</strong> 라는 의미이고, <strong>클러스터형 인덱스</strong>입니다.</li>
-<li>Column_name: col1 열에 인덱스가 생성되어 있습니다.</li>
-<li>Non_unique: 고유하지 않음을 0 (False), 1 (True)로 나타냅니다.</li>
-</ul>
-<br>
-<h4 id="primary-key"><a class="markdownIt-Anchor" href="#primary-key"></a> PRIMARY KEY</h4>
-<ul>
-<li>PRIMARY KEY 가 지정되면 해당 열에 <strong>자동으로 인덱스가 생성</strong>되며, 클러스터형 인덱스 입니다.</li>
-<li><strong>자동으로 순서대로 정렬</strong>됩니다. (중간에 row가 추가되어도요)</li>
-<li>PRIMARY KEY가 변경되면 인덱스를 다시 생성합니다. 데이터 양에 따라 소요시간이 길어질 수 있습니다.</li>
-<li>기본적으로 UNIQUE입니다. (중복되지 않습니다)</li>
-</ul>
-<br>
-<h4 id="unique"><a class="markdownIt-Anchor" href="#unique"></a> UNIQUE</h4>
-<ul>
-<li>UNIQUE로 지정하면 값이 중복되지 않고 <strong>보조 인덱스</strong>로 지정됩니다.</li>
-<li>별도 공간에 인덱스를 생성합니다.</li>
-<li>데이터는 바뀌지 않습니다.</li>
-</ul>
-<br>
-<h1 id="인덱스-내부-작동"><a class="markdownIt-Anchor" href="#인덱스-내부-작동"></a> 인덱스 내부 작동</h1>
-<p>클러스터형 인덱스가 빠르게 찾는 원리에 대해 알아봅시다.</p>
-<p>예를 들어, 아래에 정렬된 데이터의 배열이 있습니다.</p>
-<br>
-<img  width=600px src=/images/hongong_s_05_fig2.png>
-<p><br><br></p>
-<p>배열에서 7이라는 숫자를 찾으려면 어떻게 해야할까요?</p>
-<br>
-<p>우리는 그림으로 그려서 딱 보이지만 컴퓨터는 배열내 원소를 바로 찾지 못합니다. 각 데이터를 조회 해야합니다.</p>
-<p>가장 쉬운 방법은 1부터 하나씩 하나씩 조회해 보는 것입니다.</p>
-<p><code>1, 2, 3 , .. , 7</code> 이런 식으로요. 7번의 조회를 해야합니다.</p>
 <blockquote>
-<p>수행 횟수는 Big O 개념으로 시간 복잡도로 나타낼 수 있고, 여기서는 $ O(7) $ 입니다.</p>
+<p>scanf 함수에서 변수에 지정할 때 &amp;를 사용하는 것도 변수의 주소를 알려주기 위함이며, 포인터가 존재하면 포인터를 직접 &amp; 없이 넣어줄 수 있습니다.</p>
 </blockquote>
 <br>
-<p>하지만 이런식으로 찾으면 어떨까요?</p>
-<p><br><br></p>
-<img width=600px src=/images/hongong_s_05_fig3.png>
-<p><br><br></p>
-<p>7을 찾았습니다. 7번 조회해야하는 일을 3번만에 수행하였습니다. -&gt; $ O(3) $</p>
-<p>이것이 가능한 이유는 배열이 정렬되어 있었고, 가운데 원소의 위치를 미리 알고 있었기 때문입니다.</p>
-<p>인덱스로 지정된 컬럼이 자동으로 정렬되는 이유도 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="type">int</span> *pa = &amp;a;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, pa); <span class="comment">// 위와 같은 동작을 한다.</span></span><br></pre></td></tr></table></figure>
 <br>
-<p>클러스터형 인덱스, 보조 인덱스는 모두 <strong>균형 트리</strong><sup>Balanced Tree, B-Tree</sup>로 만들어집니다.</p>
-<p>균형트리는 위 그림의 배열을 트리 형태로 만든 것입니다.</p>
-<p>SQL에서는 조금 형태가 다릅니다. 아래 그림을 보시죠.</p>
+<h3 id="const를-사용한-포인터"><a class="markdownIt-Anchor" href="#const를-사용한-포인터"></a> const를 사용한 포인터</h3>
+<p>포인터를 const로 지정한다면, 포인터 간접 참조해 변수의 값을 바꿀 수 없습니다. 단, 포인터 가리키는 변수를 바꾸는 것은 가능합니다.</p>
 <br>
-<img width=600px src=/images/hongong_s_05_fig4.png>
-<p><br><br></p>
-<p>가장 처음은 루트<sup>Root</sup>, 중간<sup>Internal</sup>, 리프<sup>Leaf</sup> 노드로 나누어집니다.</p>
-<p>트리의 노드는 MySQL에서는 <strong>페이지 (page)</strong> 라고 부릅니다.</p>
-<p>페이지에는 여러개의 값이 들어 갈 수 있습니다. 하지만 원리는 바로 전에 보여드린 그림과 비슷합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p = &amp;a;</span><br><span class="line"></span><br><span class="line">p = &amp;b; <span class="comment">// 가능</span></span><br><span class="line">*p = <span class="number">3</span>; <span class="comment">// 에러 발생</span></span><br></pre></td></tr></table></figure>
 <br>
-<p>7을 찾는 과정은 아래와 같습니다.</p>
-<p><code>루트 페이지의 1 -&gt; 루트 페이지의 7 -&gt; 중간 페이지의 7 -&gt; 리프 페이지의 7</code></p>
-<p>4번의 조회로 찾았고, 페이지는 3번 조회를 하였습니다. SQL에서 데이터의 수를 조회하는 것보다 페이지의 조회 횟수로 효율성을 판단합니다.</p>
-<p>그리고, 값이 <strong>추가</strong>된다면 페이지가 새로 생성될 수도 있습니다. 15가 추가된다면, 중간 페이지 내 12의 하위 페이지에는 자리가 없으므로 중간 페이지에 15가 추가되고 리프 페이지가 새로 생성됩니다.</p>
+<h3 id="주소와-포인터-차이"><a class="markdownIt-Anchor" href="#주소와-포인터-차이"></a> 주소와 포인터 차이</h3>
+<p>주소는 변수의 메모리 저장공간의 주소 값 자체이며, 포인터는 변수의 주소 값을 저장하는 변수입니다. 주소는 상수이며 포인터는 변수이므로, 하나의 주소를 여러 포인터가 가리킬 수도 있습니다.</p>
 <br>
-<p>보조 인덱스 (Secondary Index)는 데이터를 변경하지 않고, 데이터의 위치를 알려주는 역할을 합니다.</p>
-<p>하지만, 보조 인덱스의 인덱스 페이지 내에서는 데이터가 정렬되어 있습니다. 그리고 말단 노드에는 데이터의 위치가 <strong>페이지 번호+#위치</strong> 로 나타납니다. 책 부록의 찾아보기와 같습니다.</p>
-<p>위치만 나타나 있으므로, 보조 인덱스를 활용하면 데이터에 두 번 접근하게됩니다. 하지만 그냥 찾을때 보다는 훨씬 빠릅니다.</p>
-<p>추가로,</p>
-<blockquote>
-<p>페이지는 하나당 16KB의 공간이 필요합니다.<br />
-Primary Key로 데이터를 조회하면 소요되는 비용은 $ O(log{N}) $입니다.<br>보조 인덱스로 데이터를 조회하면 소요되는 비용은 $ O(2*log{N}) $ 입니다.</p>
-</blockquote>
-<p><br><br></p>
-<h1 id="인덱스-실제-사용"><a class="markdownIt-Anchor" href="#인덱스-실제-사용"></a> 인덱스 실제 사용</h1>
+<h3 id="주소와-포인터-크기"><a class="markdownIt-Anchor" href="#주소와-포인터-크기"></a> 주소와 포인터 크기</h3>
+<p>포인터는 변수의 주소를 저장하고 있기 때문에, 포인터 자체도 크기가 있으며 이는 가리키는 변수의 자료형과는 상관없이 일정합니다.</p>
 <br>
-<p><strong>인덱스 생성</strong></p>
-<p>테이블을 생성할 때, 인덱스를 설정할 수 있지만 따로 설정할 수 있습니다.</p>
-<p>기본 문법은 아래와 같습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX 인덱스_이름</span><br><span class="line">    <span class="keyword">ON</span> 테이블_이름 (열_이름) [<span class="keyword">ASC</span> <span class="operator">|</span> <span class="keyword">DESC</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="포인터의-대입-규칙"><a class="markdownIt-Anchor" href="#포인터의-대입-규칙"></a> 포인터의 대입 규칙</h3>
 <br>
-<p><strong>인덱스 제거</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX 인덱스_이름 <span class="keyword">ON</span> 테이블_이름</span><br></pre></td></tr></table></figure>
+<p>아래 예시를 보면 double 형 포인터에 int형 포인터의 주소를 입력한 예시입니다.</p>
 <br>
-<p><strong>실습</strong></p>
-<p><code>member</code> 테이블의 형태는 다음과 같습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-<img width=600px src=/images/hongong_s_05_fig5.png>
-<p><br><br></p>
-<p>member 테이블의 인덱스는 다음과 같이 구성되어 있습니다. 최초 생성때 mem_id에 PRIMARY KEY를 지정하여 PRIMARY로 지정되어 있습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> <span class="keyword">member</span>;</span><br></pre></td></tr></table></figure>
-<img width=600px src=/images/hongong_s_05_fig6.png>
-<p><br><br></p>
-<p>테이블의 STATUS는 다음처름 확인할 수 있습니다.</p>
-<ul>
-<li>페이지는 하나당 16KB를 차지하므로 Data_length에 16384 가 지정되어 있습니다.</li>
-<li>Index_length는 보조 인덱스의 크기입니다. 아직 보조인덱스가 없으므로 크기가 0입니다.</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;member&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<img width=600px src=/images/hongong_s_05_fig7.png>
-<p><br><br></p>
-<p><code>addr</code> 열을 보조인덱스로 지정해봅시다.여기서는 중복을 허용하는 <strong>단순 보조 인덱스</strong>를 추가하겠습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX idex_member_addr</span><br><span class="line">	<span class="keyword">ON</span> <span class="keyword">member</span> (addr);</span><br></pre></td></tr></table></figure>
-<p><br><br></p>
-<p>⭐️ 생성한 인덱스를 적용시키려면 <code>ANALYZE TABLE</code>을 이용해 테이블을 분석/처리 해주어야 합니다.</p>
-<p>아래 결과에서 Index_length에 1페이지 크기가 늘어난 것을 확인할 수 있습니다. 보조 인덱스가 1개이므로 1페이지가 생성되었습니다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE <span class="keyword">TABLE</span> <span class="keyword">member</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;member&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<img width=600px src=/images/hongong_s_05_fig8.png>
-<p><br><br></p>
-<p><strong>참고</strong></p>
-<ul>
-<li>MySQL에서는 <code>Executation Plan</code> 탭이 실행결과 오른쪽에 위치해 있습니다. 테이블 검색의 비용을 확인 할 수 있습니다.</li>
-<li>SELECT로만 조회하면 인덱스를 사용하지 않습니다. WHERE같은 조건이 입력되어야 인덱스를 사용합니다.</li>
-<li>WHERE 에 연산이 추가되면 인덱스를 사용하지 않습니다. 예, <code>WHERE mem_number*2 &gt;= 14</code></li>
-</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="type">int</span> *p = &amp;a;</span><br><span class="line"><span class="type">double</span> *pd;</span><br><span class="line"></span><br><span class="line">pd = p; <span class="comment">// 포인터의 자료형이 다르다.</span></span><br></pre></td></tr></table></figure>
 <br>
-<h2 id="인덱스를-효과적으로-사용하는-방법"><a class="markdownIt-Anchor" href="#인덱스를-효과적으로-사용하는-방법"></a> 인덱스를 효과적으로 사용하는 방법</h2>
-<ul>
-<li>인덱스는 열 단위에 생성됩니다.</li>
-<li>WHERE 절에서 사용되는 열에 인덱스를 만들어야합니다.</li>
-<li>WHERE 절에 사용되더라도 자주 사용되어야 가치가 있습니다.</li>
-<li>데이터의 중복이 많은 열은 인덱스를 만들어도 효과가 없습니다.</li>
-<li>클러스터형 인덱스는 테이블당 하나만 생성할 수 있습니다.</li>
-<li>사용하지 않는 인덱스는 제거해야 합니다.</li>
-</ul>
-<p><br><br></p>
-<p>오늘은 SQL의 핵심 개체인 인덱스에 대해 정리하였습니다.</p>
-<p>다음에는 Stored Procedure에 대해 정리하고, 파이썬과 연동을 해보겠습니다.</p>
-<p>읽어주셔서 감사합니다 👋</p>
-<p><br><br><br><br></p>
-<!-- flag of hidden posts -->
+<p>a의 주소가 100을 가리키고 있다면, 메모리에는 100~103을 차지하게 됩니다.</p>
+<p>double형 포인터는 a의 주소를 가질 수 있으나, double은 8바이트의 크기를 가지므로 100 ~ 107의 값을 사용하게 되므로, 의도한 결과가 나타나지 않게됩니다.</p>
+<br>
+<h3 id="포인터를-사용하는-이유"><a class="markdownIt-Anchor" href="#포인터를-사용하는-이유"></a> 포인터를 사용하는 이유</h3>
+<p>메모리에 직접 접근하는 경우나, 동적할당한 메모리를 사용하는 경우에 필요합니다.</p>
+<p>두 변수의 값을 바꾸는 함수의 예시입니다. swap 함수에 int형 변수의 주소를 2개 넣어주면 두 값을 바꾸는 기능을 합니다. 이처럼 변수의 주소를 이용하면 함수간에 데이터를 공유하는 것이 편리해집니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *pa, <span class="type">int</span> *pb)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> temp;</span><br><span class="line">	temp = *pa;</span><br><span class="line">	*pa = *pb;</span><br><span class="line">	*pb = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p>다음은 3개의 실수를 입력 받고 정렬될 값을 출력하는 예시입니다.</p>
+<br>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">double</span> *pa, <span class="type">double</span> *pb)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">line_up</span><span class="params">(<span class="type">double</span> *maxp, <span class="type">double</span> *midp, <span class="type">double</span> *minp)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> max, mid, min;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;실수값 3개를 입력하세요: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf&quot;</span>, &amp;max, &amp;mid, &amp;min);</span><br><span class="line">    line_up(&amp;max, &amp;mid, &amp;min);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;정렬된 값: %.1lf %.1lf %.1lf\n&quot;</span>, max, mid, min);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">double</span> *pa, <span class="type">double</span> *pb)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> temp;</span><br><span class="line">    temp = *pa;</span><br><span class="line">    *pa = *pb;</span><br><span class="line">    *pb = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">line_up</span><span class="params">(<span class="type">double</span> *maxp, <span class="type">double</span> *midp, <span class="type">double</span> *minp)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (*minp &gt; *midp)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(minp, midp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (*minp &gt; *maxp)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(minp, maxp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (*midp &gt; *maxp)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(midp, maxp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+<p>오늘은 포인터 기본에 대해 정리해 보았습니다. 감사합니다~~👋👋</p>
+<p><br><br><br></p>
+
       
     </div>
     <div class="article-footer">
@@ -501,7 +395,7 @@ Primary Key로 데이터를 조회하면 소요되는 비용은 $ O(log{N}) $입
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/" title="SQL | 인덱스 살펴보기" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/</a>
+      <a href="https://jonghwanyoon.github.io/2023/08/20/hongong-c-06/" title="혼자 공부하는 C - 포인터" target="_blank" rel="external">https://jonghwanyoon.github.io/2023/08/20/hongong-c-06/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -546,6 +440,16 @@ Primary Key로 데이터를 조회하면 소요되는 비용은 $ O(log{N}) $입
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2023/07/13/book-cracking-the-coding-interview/" title="(책) 코딩 인터뷰 완전분석"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
   
   
@@ -625,9 +529,9 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     <script defer>
     var disqus_config = function () {
         
-            this.page.url = 'https://jonghwanyoon.github.io/2023/02/12/hongong-s-05/';
+            this.page.url = 'https://jonghwanyoon.github.io/2023/08/20/hongong-c-06/';
         
-        this.page.identifier = 'hongong-s-05';
+        this.page.identifier = 'hongong-c-06';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
