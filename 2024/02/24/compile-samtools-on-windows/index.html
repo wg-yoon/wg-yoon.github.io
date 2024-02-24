@@ -18,17 +18,18 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Samtools를 Windows에서 Compile 하기 | jonghwanyoon</title>
+  <title>htslib과 samtools를 windows에서 compile 하기 | jonghwanyoon</title>
   <meta name="description" content="머리말 Samtools를 windows에서 exe 파일로 compile 하는 과정 정리. htslib과 samtools에서 공식적으로 제공한다. 하지만, 문서가 파편화되어 보인다. 한국어로는 정리된게 없으므로 정리해본다. 순서는 다음과 같다.  MSYS2 환경을 만들고, samtools에 필요한 tool과 library를 설치한다. htslib과 sam">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Samtools를 Windows에서 Compile 하기">
+<meta property="og:title" content="htslib과 samtools를 windows에서 compile 하기">
 <meta property="og:url" content="https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/index.html">
 <meta property="og:site_name" content="Jonghwan Yoon">
 <meta property="og:description" content="머리말 Samtools를 windows에서 exe 파일로 compile 하는 과정 정리. htslib과 samtools에서 공식적으로 제공한다. 하지만, 문서가 파편화되어 보인다. 한국어로는 정리된게 없으므로 정리해본다. 순서는 다음과 같다.  MSYS2 환경을 만들고, samtools에 필요한 tool과 library를 설치한다. htslib과 sam">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-02-24T02:18:46.000Z">
-<meta property="article:modified_time" content="2024-02-24T05:04:12.117Z">
+<meta property="article:modified_time" content="2024-02-24T05:07:04.445Z">
 <meta property="article:author" content="Jonghwan Yoon">
+<meta property="article:tag" content="samtools,htslib">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/index.html">
@@ -171,7 +172,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Bioinformatics/">Bioinformatics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%B1%85/">책</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%ED%98%BC%EA%B3%B5/">혼공</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Bioinformatics/">Bioinformatics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%B1%85/">책</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -181,7 +182,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/%EB%A6%AC%EB%B7%B0/" style="font-size: 14px;">리뷰</a> <a href="/tags/%EC%B1%85/" style="font-size: 14px;">책</a> <a href="/tags/%EC%BD%94%EB%94%A9-%EC%9D%B8%ED%84%B0%EB%B7%B0/" style="font-size: 13px;">코딩 인터뷰</a>
+      <a href="/tags/Hexo/" style="font-size: 14px;">Hexo</a> <a href="/tags/samtools-htslib/" style="font-size: 13px;">samtools,htslib</a> <a href="/tags/%EB%A6%AC%EB%B7%B0/" style="font-size: 14px;">리뷰</a> <a href="/tags/%EC%B1%85/" style="font-size: 14px;">책</a> <a href="/tags/%EC%BD%94%EB%94%A9-%EC%9D%B8%ED%84%B0%EB%B7%B0/" style="font-size: 13px;">코딩 인터뷰</a>
     </div>
   </div>
 
@@ -199,7 +200,7 @@
                 <a class="category-link" href="/categories/Bioinformatics/">Bioinformatics</a>
               </p>
               <p class="item-title">
-                <a href="/2024/02/24/compile-samtools-on-windows/" class="title">Samtools를 Windows에서 Compile 하기</a>
+                <a href="/2024/02/24/compile-samtools-on-windows/" class="title">htslib과 samtools를 windows에서 compile 하기</a>
               </p>
               <p class="item-date">
                 <time datetime="2024-02-24T02:18:46.000Z" itemprop="datePublished">2024-02-24</time>
@@ -256,7 +257,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%ED%98%BC%EA%B3%B5/">혼공</a>
+                
               </p>
               <p class="item-title">
                 <a href="/2023/07/03/hongong-10th-summary/" class="title">(책) 혼자 공부하는 C언어 정리</a>
@@ -287,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Samtools를 Windows에서 Compile 하기
+      htslib과 samtools를 windows에서 compile 하기
     </h1>
   
 
@@ -306,6 +307,11 @@
   </span>
 
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/samtools-htslib/" rel="tag">samtools,htslib</a>
+  </span>
+
 
         
 
@@ -443,7 +449,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/" title="Samtools를 Windows에서 Compile 하기" target="_blank" rel="external">https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/</a>
+      <a href="https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/" title="htslib과 samtools를 windows에서 compile 하기" target="_blank" rel="external">https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -607,20 +613,5 @@ ga('send', 'pageview');
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
