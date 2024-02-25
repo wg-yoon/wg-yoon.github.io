@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/</loc>
+    
+    <lastmod>2024-02-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jonghwanyoon.github.io/2023/07/03/hongong-10th-summary/</loc>
     
     <lastmod>2024-02-24</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://jonghwanyoon.github.io/2023/03/09/hongong-9th-summary/</loc>
-    
-    <lastmod>2024-02-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/</loc>
     
     <lastmod>2024-02-24</lastmod>
     

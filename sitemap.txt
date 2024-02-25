@@ -1,6 +1,6 @@
+https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/
 https://jonghwanyoon.github.io/2023/07/03/hongong-10th-summary/
 https://jonghwanyoon.github.io/2023/03/09/hongong-9th-summary/
-https://jonghwanyoon.github.io/2024/02/24/compile-samtools-on-windows/
 https://jonghwanyoon.github.io/about/index.html
 https://jonghwanyoon.github.io/2024/01/04/book-plotly-interactive-visualization/
 https://jonghwanyoon.github.io/2023/07/13/book-cracking-the-coding-interview/

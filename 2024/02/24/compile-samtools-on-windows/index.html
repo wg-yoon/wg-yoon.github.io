@@ -27,7 +27,7 @@
 <meta property="og:description" content="머리말 Samtools를 windows에서 exe 파일로 compile 하는 과정 정리. htslib과 samtools에서 공식적으로 제공한다. 하지만, 문서가 파편화되어 보인다. 한국어로는 정리된게 없으므로 정리해본다. 순서는 다음과 같다.  MSYS2 환경을 만들고, samtools에 필요한 tool과 library를 설치한다. htslib과 sam">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-02-24T02:18:46.000Z">
-<meta property="article:modified_time" content="2024-02-24T05:07:04.445Z">
+<meta property="article:modified_time" content="2024-02-25T06:28:06.405Z">
 <meta property="article:author" content="Jonghwan Yoon">
 <meta property="article:tag" content="samtools,htslib">
 <meta name="twitter:card" content="summary">
@@ -369,7 +369,7 @@
 <ul>
 <li><code>mingw-w64-x86_64-autotools</code>: MSYS2에서 compile에 사용할 autoheader과 autoconfig를 설치해준다.</li>
 <li><code>mingw-w64-x86_64-toolchain</code>: compiler 관련된 도구들을 설치해준다.</li>
-<li><code>mingw-w64-x86_64-curl</code>, <code>mingw-w64-x86_64-zlib</code>, <code>mingw-w64-x86_64-bzip2</code>, <code>mingw-w64-x86_64-xz</code>, <code>mingw-w64-x86_64-ncurses</code> : samtools에 필요한 library 들이다.</li>
+<li><code>mingw-w64-x86_64-curl</code>, <code>mingw-w64-x86_64-zlib</code>, <code>mingw-w64-x86_64-bzip2</code>, <code>mingw-w64-x86_64-xz</code>, <code>mingw-w64-x86_64-ncurses</code> : htslib, samtools에 필요한 library들.</li>
 <li><code>git</code></li>
 </ul>
 <p><br><br></p>
@@ -380,7 +380,7 @@
 <p>git clone 및 compile은 아래 과정으로 진행된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b master https://github.com/samtools/htslib</span><br><span class="line"><span class="built_in">cd</span> htslib</span><br><span class="line"></span><br><span class="line"><span class="comment"># htscodecs 서브 모듈 설치</span></span><br><span class="line">git submodule update --init --recursive</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># autoconf는 2.69 버전으로 돌려준다.</span></span><br><span class="line">autoheader &amp;&amp; autoconf-2.69 &amp;&amp; ./configure &amp;&amp; make -j4 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 혹은 아래를 이용한다.</span></span><br><span class="line"><span class="comment"># autoheader &amp;&amp; autoconf &amp;&amp; ./configure &amp;&amp; make -j4 &amp;&amp; make install</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>아직 잘 모르는점. autoconf를 실행하면 2.72 버전 (최신)이 실행되는데, compile이 이걸로는 compile이 되지 않는다. 여기서는 2.69 버전을 실행하면 정상적으로 compile이 된다.</p>
+<p>아직 잘 모르는점. autoconf를 실행하면 2.72 버전 (최신)이 실행되는데, 이걸로는 compile이 되지 않는다. 여기서는 2.69 버전을 실행하면 정상적으로 된다.</p>
 </blockquote>
 <h2 id="samtools-compile"><a class="markdownIt-Anchor" href="#samtools-compile"></a> Samtools Compile</h2>
 <p>나는 user 경로에서 진행했다.</p>
@@ -428,10 +428,8 @@
 <h1 id="맺음말"><a class="markdownIt-Anchor" href="#맺음말"></a> 맺음말</h1>
 <ul>
 <li>MSYS2의 사용방법을 배웠다. 유용하게 사용할 수 있을 것 같다.</li>
-<li>이번 htslib &amp; samtools 설치로, windows compile이 가능해지니 htslib의 dll 파일을 얻을 수 있고, htslib을 binding하는 다른 언어의의 library에서도 편하게 사용이 가능하다. (조금 수정이 필요할 순 있다)</li>
-<li>windows에서 htslib을 이용한 GUI 프로그램 만들 때, 언어에 크게 구애받지 않아도 되겠다.</li>
+<li>이번 htslib &amp; samtools 설치로, windows compile이 가능해지니  htslib을 binding하는 다른 언어의의 library에서도 편하게 사용이 가능하다. (조금 수정이 필요할 순 있다)</li>
 </ul>
-<p>이제 Rust에서 GUI 도구 만들기를 해봐야겠다.</p>
 <p><br><br><br></p>
 <p><strong>Reference</strong></p>
 <ol>
