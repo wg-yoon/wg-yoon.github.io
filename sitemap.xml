@@ -112,7 +112,7 @@
 
   <url>
     <loc>https://jonghwanyoon.github.io/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -120,35 +120,35 @@
   
   <url>
     <loc>https://jonghwanyoon.github.io/tags/Hexo/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/tags/%EC%B1%85/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/tags/%EC%BD%94%EB%94%A9-%EC%9D%B8%ED%84%B0%EB%B7%B0/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/tags/%EB%A6%AC%EB%B7%B0/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/tags/samtools-htslib/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -157,21 +157,21 @@
   
   <url>
     <loc>https://jonghwanyoon.github.io/categories/Hexo/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/categories/%EC%B1%85/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jonghwanyoon.github.io/categories/Bioinformatics/</loc>
-    <lastmod>2024-02-25</lastmod>
+    <lastmod>2024-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
