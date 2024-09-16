@@ -3,18 +3,29 @@ project:
   output-dir: docs
 
 website:
-  title: "."
+  title: ""
+  # favicon: images/DALLE_whale.webp
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/jonghwanyoon
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jonghwan-yoon
+  site-url: https://jonghwanyoon.github.io
+  description: "Do bioinformatics"
+
+  # 외부 태그 관련
+  google-analytics: UA-140384355-2 
+  page-footer: 
+    background: light
+    left: © 2024
+
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
+    toc: true
 
 
 

@@ -1,6 +1,6 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
+title: "한글 테스트 Test"
+author: "jonghwan"
 date: "2024-09-17"
 categories: [news, code, analysis]
 image: "image.jpg"
