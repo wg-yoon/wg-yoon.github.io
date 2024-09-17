@@ -1,14 +1,21 @@
 ---
-title: "Home"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: grid
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: ""
+image: images/DALLE_whale.webp
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      text: Mail
+      href: mailto:oknmj101@naver.com
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/jonghwan-yoon
+    - icon: github
+      text: Github
+      href: https://github.com/jonghwanyoon
+
 ---
 
+# Jonghwan Yoon {.unlisted}
 
+Researcher & Bioinformatician

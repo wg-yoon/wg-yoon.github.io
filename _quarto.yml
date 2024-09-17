@@ -3,11 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: ""
+  title: "Jonghwan Yoon"
   # favicon: images/DALLE_whale.webp
   navbar:
+    title: false
+    logo: images/DALLE_whale.webp
     right:
-      - about.qmd
+      - posts.qmd
       - icon: github
         href: https://github.com/jonghwanyoon
       - icon: linkedin

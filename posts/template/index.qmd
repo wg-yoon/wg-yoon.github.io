@@ -1,8 +1,8 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2024-09-14"
-categories: [news]
+title: "템플릿"
+author: "jonghwan"
+date: "2024-09-17"
+categories: [news, code, analysis]
 draft: true
 ---
 

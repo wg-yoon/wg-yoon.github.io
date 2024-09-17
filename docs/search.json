@@ -9,9 +9,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Home",
+    "title": "Jonghwan Yoon",
     "section": "",
-    "text": "한글 테스트 Test\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\njonghwan\n\n\nSep 17, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Jonghwan Yoon\nResearcher & Bioinformatician"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -19,5 +19,19 @@
     "title": "한글 테스트 Test",
     "section": "",
     "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/learned/index.html",
+    "href": "posts/learned/index.html",
+    "title": "Where Learnings Come Together",
+    "section": "",
+    "text": "정리"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Reseacher & Bioinformatician\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Learnings Come Together\n\n\n\nLearning\n\n\n\n정리\n\n\n\njonghwan\n\n\nSep 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n한글 테스트 Test\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\njonghwan\n\n\nSep 17, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

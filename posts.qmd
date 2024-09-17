@@ -1,0 +1,22 @@
+---
+title: "Posts"
+listing:
+  contents: 
+    - path: https://jonghwanyoon.github.io/notes
+      title: "Where Learnings Come Together"
+      author: jonghwan
+      image: images/cover_learning.png
+      description: "정리"
+      date: "2024-09-18"
+      categories: [Learning]
+    - posts
+  sort: "date desc"
+  type: grid
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
+Reseacher & Bioinformatician
