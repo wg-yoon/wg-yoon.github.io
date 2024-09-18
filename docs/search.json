@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Posts",
     "section": "",
-    "text": "Reseacher & Bioinformatician"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Jonghwan Yoon",
-    "section": "",
-    "text": "Jonghwan Yoon\nResearcher & Bioinformatician"
+    "text": "Reseacher & Bioinformatician\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLearning Journal\n\n\n\nLearning\n\n\n\n정리\n\n\n\njonghwan\n\n\nSep 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n한글 테스트 Test\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\njonghwan\n\n\nSep 17, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -21,17 +14,10 @@
     "text": "This is a post with executable code."
   },
   {
-    "objectID": "posts/learned/index.html",
-    "href": "posts/learned/index.html",
-    "title": "Where Learnings Come Together",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Jonghwan Yoon",
     "section": "",
-    "text": "정리"
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Posts",
-    "section": "",
-    "text": "Reseacher & Bioinformatician\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhere Learnings Come Together\n\n\n\nLearning\n\n\n\n정리\n\n\n\njonghwan\n\n\nSep 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n한글 테스트 Test\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\njonghwan\n\n\nSep 17, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Jonghwan Yoon\nResearcher & Bioinformatician"
   }
 ]

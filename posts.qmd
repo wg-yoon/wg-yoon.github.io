@@ -2,13 +2,15 @@
 title: "Posts"
 listing:
   contents: 
+    # 노트에 대한 post는 redirection을 위해 따로 지정
     - path: https://jonghwanyoon.github.io/notes
-      title: "Where Learnings Come Together"
+      title: "Learning Journal"
       author: jonghwan
       image: images/cover_learning.png
       description: "정리"
       date: "2024-09-18"
       categories: [Learning]
+    # 다른 post들.
     - posts
   sort: "date desc"
   type: grid

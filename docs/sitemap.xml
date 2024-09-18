@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jonghwanyoon.github.io/index.html</loc>
-    <lastmod>2024-09-17T04:33:36.733Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jonghwanyoon.github.io/about.html</loc>
-    <lastmod>2024-09-16T16:30:36.641Z</lastmod>
+    <loc>https://jonghwanyoon.github.io/posts.html</loc>
+    <lastmod>2024-09-18T12:03:06.859Z</lastmod>
   </url>
   <url>
     <loc>https://jonghwanyoon.github.io/posts/post-with-code/index.html</loc>
-    <lastmod>2024-09-17T04:35:03.605Z</lastmod>
+    <lastmod>2024-09-17T07:44:12.536Z</lastmod>
   </url>
   <url>
-    <loc>https://jonghwanyoon.github.io/posts/learned/index.html</loc>
-    <lastmod>2024-09-17T05:46:21.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jonghwanyoon.github.io/posts.html</loc>
-    <lastmod>2024-09-17T05:49:25.185Z</lastmod>
+    <loc>https://jonghwanyoon.github.io/index.html</loc>
+    <lastmod>2024-09-17T07:44:12.535Z</lastmod>
   </url>
 </urlset>
