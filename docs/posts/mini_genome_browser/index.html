@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="jonghwan">
+<meta name="dcterms.date" content="2024-09-20">
 
-<title>Jonghwan Yoon - Posts</title>
+<title>Jonghwan Yoon - Godot+Rust를 활용한 IGV 만들기</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,35 +88,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
 <script type="text/javascript">
 
@@ -112,37 +103,8 @@ ga('send', {
 });
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -152,8 +114,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/DALLE_whale.webp" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/DALLE_whale.webp" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -163,7 +125,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./posts.html" aria-current="page"> 
+    <a class="nav-link" href="../../posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item compact">
@@ -186,111 +148,134 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Posts</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Godot+Rust를 활용한 IGV 만들기</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">igv</div>
+                <div class="quarto-category">godot</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>jonghwan </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 20, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Learning">Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="analysis">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="news">news <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#기획" id="toc-기획" class="nav-link active" data-scroll-target="#기획">기획</a></li>
+  <li><a href="#igv-화면-예시" id="toc-igv-화면-예시" class="nav-link" data-scroll-target="#igv-화면-예시">IGV 화면 예시</a></li>
+  <li><a href="#ui" id="toc-ui" class="nav-link" data-scroll-target="#ui">UI</a>
+  <ul class="collapse">
+  <li><a href="#alignment" id="toc-alignment" class="nav-link" data-scroll-target="#alignment">Alignment</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-<p>Reseacher &amp; Bioinformatician</p>
+<p>간단한 Alignment Viewer를 만들어보자.</p>
+<p>IGV <span class="citation" data-cites="igv_10.1093/bib/bbs017">(<a href="#ref-igv_10.1093/bib/bbs017" role="doc-biblioref">Thorvaldsdóttir, Robinson, and Mesirov 2012</a>)</span>는 Bioinformatic의 NGS 분야에서 사용되는 시각화도구다. Genome Level에서 BAM/CRAM, VCF, SEG 등의 파일을 시각화 할수 있고, 주로 BAM같은 정렬된 시퀀싱 데이터를 직관적으로 나타낸다.</p>
+<p>처음에 JAVA로 작성된 Desktop Application인 IGV를 선보였고, 웹을 위한 IGV.js (<a href="https://github.com/igvteam/igv.js">github</a>)도 있으며, 이를 활용해 report를 생성해주는 igv-reports (<a href="https://github.com/igvteam/igv-reports">github</a>)도 출시하였다. 그 외에도 다양하므로 IGV Team의 <a href="https://github.com/orgs/igvteam/repositories">github repo</a>를 참고해보자.</p>
+<section id="기획" class="level2">
+<h2 class="anchored" data-anchor-id="기획">기획</h2>
+<p>간단히 IGV 처럼 시각화 하는 도구를 테스트로 만들어보고자 한다. 이번에 테스트 해보려는 도구는 Godot과 Rust이다.</p>
+<p><strong>Godot</strong> <span class="citation" data-cites="godot">(<a href="#ref-godot" role="doc-biblioref">Juan Linietsky 2007</a>, <a href="https://github.com/godotengine/godot" role="doc-biblioref">github</a>)</span>은 오픈소스 게임엔진으로 사용이 간편하고 Cross-platform이다. 스크립팅에는 자체 언어인 GDScript와 C++를 지원한다. GDScript는 python와 유사한 패턴이며 다루기 어렵지 않다. 간편함 때문인지 가끔 Data Science 분야에서 시뮬레이션에 사용하는 글도 자주 보인다. 또, 게임엔진이지만 GUI 도구를 만드는게 매우 간편해보인다.</p>
+<p><strong>Rust</strong> <span class="citation" data-cites="bugden2022rustprogramminglanguagesafety">(<a href="#ref-bugden2022rustprogramminglanguagesafety" role="doc-biblioref">Bugden and Alahmar 2022</a>, <a href="https://github.com/rust-lang/rust" role="doc-biblioref">github</a>)</span>는 메모리 안정성이 뛰어나고 속도가 빠른 언어이다. 속도는 C 및 C++에 동등하다. 최근 개발자들이 좋아하는 언어이다. Bioinformatics 분야에서도 이를 활용하는 케이스가 자주 보인다.</p>
+<p><strong>목적</strong></p>
+<ul>
+<li>Godot이 무거운 GUI application으로써 사용이 가능한지 확인한다. <br><i><strong>무거운</strong>이 초점이다.</i></li>
+<li>Godot-Rust로 만든 application이 실제로 활용 가능성이 있는지 확인한다.</li>
+</ul>
+<p><strong>기초 구상</strong></p>
+<p>기본적인 기능만 갖추면 되며 초기 기획은 다음과 같다.</p>
+<ol type="1">
+<li>hg38을 대상으로 한다.</li>
+<li>BAM파일을 읽을 수 있다.</li>
+<li>원하는 영역의 alignment를 IGV 형태처럼 보여줄 수 있다.</li>
+<li>Read를 클릭하면 Read 정보가 나타날 수 있다.</li>
+</ol>
+<p>Godot의 GDScript는 조금 써보았으나, 느리고 BAM파일을 읽는 라이브러리는 없다. Rust를 사용하면 코드의 속도는 보완될 것이며 BAM파일을 처리할 수 있는 크레이트도 있으므로 데이터 처리는 문제가 없을 것이다.</p>
+<p><strong>사용할 라이브러리</strong></p>
+<ul>
+<li><strong>Godot Rust</strong> <span class="citation" data-cites="github:godot_rust">(<a href="#ref-github:godot_rust" role="doc-biblioref">Bromeon 2023</a>)</span><br> Godot에서 Rust를 사용할 수 있도록 binding하는 Rust의 Godot Rust Crate를 사용한다. 대부분의 코드 작성은 이걸로 진행.</li>
+<li><strong>Noodles</strong> <span class="citation" data-cites="github:noodles">(<a href="#ref-github:noodles" role="doc-biblioref">zaeleus 2018</a>)</span><br>Rust에서 Bioinformatics data들을 다루게 해주는 크레이트. 순수 Rust로 작성되어있다.</li>
+</ul>
+<p><strong>리소스 파일</strong></p>
+<p>BAM 파일은 <code>1000genome FTP</code>에서 제공하는 아무 subject의 chr20 low_coverage 를 사용한다. 추가로, deepsequencing 데이터를 찾아보는 중.</p>
+</section>
+<section id="igv-화면-예시" class="level2">
+<h2 class="anchored" data-anchor-id="igv-화면-예시">IGV 화면 예시</h2>
+<p>chr20:31,023,417-31,024,716</p>
+<p><img src="igv_screenshot.png" class="img-fluid"></p>
+<p>IGV에서 Alignment를 표현하는 방식은 순차적으로 쌓인 Read를 빈공간이 없게 차곡차곡 쌓는다.</p>
+<p>테스트를 위해 python 코드를 작성했다.</p>
+</section>
+<section id="ui" class="level2">
+<h2 class="anchored" data-anchor-id="ui">UI</h2>
+<p>필요한 Object는 아래와 같다</p>
+<ul>
+<li>Coverage Track</li>
+<li>Alignment Track
+<ul>
+<li>Alignment</li>
+</ul></li>
+</ul>
+<section id="alignment" class="level3">
+<h3 class="anchored" data-anchor-id="alignment">Alignment</h3>
+<p>기능: Read의 특정 Base를 클릭하면 Read 및 Base 정보가 출력되야한다. 표시: Read는 forward/reverse에 따라 색을 표현하고</p>
 
 
 
+</section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="Learning" data-listing-date-sort="1726585200000">
-<a href="https://jonghwanyoon.github.io/notes" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="images/cover_learning.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Learning Journal
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Learning'); return false;">
-Learning
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-github:godot_rust" class="csl-entry" role="listitem">
+Bromeon. 2023. <span>“<span>R</span>ust Bindings for <span>G</span>odot4.”</span> <a href="https://github.com/godot-rust/gdext">https://github.com/godot-rust/gdext</a>.
 </div>
+<div id="ref-bugden2022rustprogramminglanguagesafety" class="csl-entry" role="listitem">
+Bugden, William, and Ayman Alahmar. 2022. <span>“Rust: The Programming Language for Safety and Performance.”</span> <a href="https://arxiv.org/abs/2206.05503">https://arxiv.org/abs/2206.05503</a>.
 </div>
-<div class="card-text listing-description">
-정리
+<div id="ref-godot" class="csl-entry" role="listitem">
+Juan Linietsky, Ariel Manzur. 2007. <span>“Godot Engine.”</span> <a href="https://godotengine.org/">https://godotengine.org/</a>.
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-jonghwan
+<div id="ref-igv_10.1093/bib/bbs017" class="csl-entry" role="listitem">
+Thorvaldsdóttir, Helga, James T. Robinson, and Jill P. Mesirov. 2012. <span>“<span class="nocase">Integrative Genomics Viewer (IGV): high-performance genomics data visualization and exploration</span>.”</span> <em>Briefings in Bioinformatics</em> 14 (2): 178–92. <a href="https://doi.org/10.1093/bib/bbs017">https://doi.org/10.1093/bib/bbs017</a>.
 </div>
-<div class="listing-date">
-Sep 18, 2024
+<div id="ref-github:noodles" class="csl-entry" role="listitem">
+zaeleus. 2018. <span>“Noodles.”</span> <a href="https://github.com/zaeleus/noodles">https://github.com/zaeleus/noodles</a>.
 </div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="news,code,analysis" data-listing-date-sort="1726498800000" data-listing-file-modified-sort="1726887613327" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="7">
-<a href="./posts/post-with-code/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img src="./posts/post-with-code/image.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-한글 테스트 Test
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('code'); return false;">
-code
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('analysis'); return false;">
-analysis
-</div>
-</div>
-<div class="card-text listing-description">
-This is a post with executable code.
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-jonghwan
-</div>
-<div class="listing-date">
-Sep 17, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -699,6 +684,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="jonghwanyoon/jonghwanyoon.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

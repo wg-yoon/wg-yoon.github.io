@@ -3,7 +3,10 @@ title: "템플릿"
 author: "jonghwan"
 date: "2024-09-17"
 categories: [news, code, analysis]
-draft: true
+draft: true 
+comments: 
+  utterances:
+    repo: jonghwanyoon/jonghwanyoon.github.io
 ---
 
 This is the first post in a Quarto blog. Welcome!

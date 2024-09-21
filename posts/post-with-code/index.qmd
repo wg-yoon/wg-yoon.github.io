@@ -4,6 +4,9 @@ author: "jonghwan"
 date: "2024-09-17"
 categories: [news, code, analysis]
 image: "image.jpg"
+comments: 
+  utterances:
+    repo: jonghwanyoon/jonghwanyoon.github.io
 ---
 
 This is a post with executable code.
