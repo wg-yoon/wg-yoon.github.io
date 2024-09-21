@@ -188,7 +188,7 @@ ga('send', {
    
   <ul>
   <li><a href="#기획" id="toc-기획" class="nav-link active" data-scroll-target="#기획">기획</a></li>
-  <li><a href="#igv-화면-예시" id="toc-igv-화면-예시" class="nav-link" data-scroll-target="#igv-화면-예시">IGV 화면 예시</a></li>
+  <li><a href="#대략적인-예상" id="toc-대략적인-예상" class="nav-link" data-scroll-target="#대략적인-예상">대략적인 예상</a></li>
   <li><a href="#ui" id="toc-ui" class="nav-link" data-scroll-target="#ui">UI</a>
   <ul class="collapse">
   <li><a href="#alignment" id="toc-alignment" class="nav-link" data-scroll-target="#alignment">Alignment</a></li>
@@ -233,12 +233,15 @@ ga('send', {
 <p><strong>리소스 파일</strong></p>
 <p>BAM 파일은 <code>1000genome FTP</code>에서 제공하는 아무 subject의 chr20 low_coverage 를 사용한다. 추가로, deepsequencing 데이터를 찾아보는 중.</p>
 </section>
-<section id="igv-화면-예시" class="level2">
-<h2 class="anchored" data-anchor-id="igv-화면-예시">IGV 화면 예시</h2>
+<section id="대략적인-예상" class="level2">
+<h2 class="anchored" data-anchor-id="대략적인-예상">대략적인 예상</h2>
 <p>chr20:31,023,417-31,024,716</p>
 <p><img src="igv_screenshot.png" class="img-fluid"></p>
 <p>IGV에서 Alignment를 표현하는 방식은 순차적으로 쌓인 Read를 빈공간이 없게 차곡차곡 쌓는다.</p>
-<p>테스트를 위해 python 코드를 작성했다.</p>
+<p>로직 구상을 위해 python으로 코드를 작성하고 예상 출력물을 작성했다.</p>
+<p><img src="python_plotly_example.png" class="img-fluid"></p>
+<p>실제 IGV와 약간 다른점이 있을 수 있다. IGV에서 실제로 어떤 로직으로 read를 정렬하는지 모르기 때문이다. (IGV를 들여다보면 실제로 이해가 안되는 정렬이 있다.)</p>
+<p>또한, MD 태그에서 Mismatch 및 Deletion을 얻어야 하고 CIGAR 에서 Inserstion 정보를 얻어서 Reference와 다른부분을 표시해야 한다.</p>
 </section>
 <section id="ui" class="level2">
 <h2 class="anchored" data-anchor-id="ui">UI</h2>
@@ -252,7 +255,25 @@ ga('send', {
 </ul>
 <section id="alignment" class="level3">
 <h3 class="anchored" data-anchor-id="alignment">Alignment</h3>
-<p>기능: Read의 특정 Base를 클릭하면 Read 및 Base 정보가 출력되야한다. 표시: Read는 forward/reverse에 따라 색을 표현하고</p>
+<p>기능: Read의 특정 Base를 클릭하면 Read 및 Base 정보가 출력되야한다. 표시: Read는 forward/reverse에 따라 색을 표현하고, Mismatch Base 및 Insersion, Deletion을 표현해야한다.</p>
+<p>Read Object에 대한 구성은 아래처럼 우선 진행한다.</p>
+<ul>
+<li>Alignment
+<ul>
+<li>Sequence</li>
+<li>Shape</li>
+<li>Bases
+<ul>
+<li>Mismatch bases</li>
+<li>Insersion</li>
+<li>Deletion</li>
+<li>Clipping</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Bases는 하위의 child는 Read에 대해 상대적 위치를 가지므로 표시하는데는 문제가 없다. 리소스가 걱정되긴한다.</p>
+<p>표현하는데 너무 많은 물체가 나오지 않을까 걱정된다. 여러 물체가 모였을 때 하나의 그림으로 표시하는 노드가 있으면 좋겠다.</p>
+<p>Read 자체를 Rect들의 집합으로 구성해야할까?</p>
 
 
 
