@@ -7,6 +7,10 @@ bibliography: reference.bib
 comments: 
   utterances:
     repo: jonghwanyoon/jonghwanyoon.github.io
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 draft: true
 ---
 
@@ -70,27 +74,228 @@ IGV에서 Alignment를 표현하는 방식은 순차적으로 쌓인 Read를 빈
 
 로직 구상을 위해 python으로 코드를 작성하고 예상 출력물을 작성했다.
 
+
+<details>
+<summary>코드</summary>
+```{.python}
+import os
+import pysam
+import re
+import plotly.graph_objects as go
+
+def parse_md_tag(md_string):
+    results = []
+    index = 0
+    md_units = re.finditer(r"(\d+)|([A-Z]|\^[A-Z]+)", md_string)
+    for unit in md_units:
+        unit = unit.groups()
+        if unit[0] is None:
+            # Mismatch
+            match = unit[1]
+            if match.startswith("^"):
+                match = match[1:]
+                status = "D"
+            else:
+                status = "X"
+            index2 = index + len(match)
+        else:
+            # Match
+            match = int(unit[0])
+            status = "="
+            if match == 0: # 아무것도 매치가 없는 경우.
+                continue
+            index2 = index + match
+        sequence_index = [index, index2]
+        index = index2
+        results.append((status, match, sequence_index))
+    return results
+
+def get_insertion_from_cigartuples(cigartuples):
+    results = []
+    sequence_index = 0
+    for cigar_type, bp in cigartuples:
+        # Insertion
+        sequence_index2 = sequence_index + bp
+        if cigar_type == 1:
+            results.append(("I", None, [sequence_index, sequence_index2]))
+        sequence_index += bp
+    return results
+
+def get_mismatches(read):
+    if not read.has_tag("MD"):
+        return []
+    md_string = read.get_tag("MD")
+    md_list = parse_md_tag(md_string)
+    ins_list = get_insertion_from_cigartuples(read.cigartuples)
+    return [md for md in md_list if md[0] != "="] + ins_list
+
+def add_line_to_base(figure, x0, x1, y0, y1):
+    figure.add_shape(
+        type="line", 
+        x0=x0, x1=x1, y0=y0, y1=y1,
+        line=dict(width=3, color="black"),
+    )
+
+BASE_COLOR_DICT = {
+    "A": "#3BEB2C", 
+    "T": "#FA2C2C", 
+    "G": "#D88130", 
+    "C": "#3B2CEB",
+    "N": "gray",
+    "D": "white", # Deletion
+}
+
+def add_base_to_figure(figure, base, x0, x1, y0, y1):
+    figure.add_shape(
+        type="rect", x0=x0, x1=x1, y0=y0, y1=y1,
+        line=dict(width=0),
+        fillcolor=BASE_COLOR_DICT[base],
+    )
+    if base == "D":
+        deletion_line = (y0+y1)/2
+        add_line_to_base(figure, x0, x1, deletion_line, deletion_line)
+
+def add_read_to_figure(
+    figure: go.Figure,
+    start: int,
+    end: int,
+    row_index: int,
+    read: pysam.AlignedSegment,
+    read_heigth=1,
+    read_margin=0.05
+):
+    # figure에 read rect 추가
+    read_color = "#EBAFAF" if read.is_forward else "#AFAFEB"
+    x0, x1 = start, end
+    y0 = row_index * read_heigth + read_margin
+    y1 = (row_index+1) * read_heigth - read_margin
+    figure.add_shape(
+        type="rect", x0=x0, x1=x1, y0=y0, y1=y1,
+        line=dict(width=0),
+        fillcolor=read_color,
+    )
+
+    # soft clip
+    sequence = read.query_sequence
+    length = read.query_length
+    if read.cigar[0][0] == 4:
+        for i in range(read.cigar[0][1]):
+            base_x0 = start + i
+            add_base_to_figure(figure, sequence[i], base_x0, base_x0 + 1, y0, y1)
+
+    if read.cigar[-1][0] == 4:
+        for i in range(length, length - read.cigar[-1][1], -1):
+            base_x0 = start + i
+            add_base_to_figure(figure, sequence[(i-1)], base_x0, base_x0 + 1, y0, y1)
+
+    # Mismatches
+    md_list = get_mismatches(read)
+    if md_list:
+        for md_units in md_list:
+            md_type, _md_bases, md_index = md_units
+            md_x0 = md_index[0] + start
+            md_x1 = md_index[1] + start 
+            if md_type == "X":
+                # Mismatch
+                add_base_to_figure(figure, sequence[md_index[0]], md_x0, md_x1, y0, y1)
+            elif md_type == "D":
+                # Deletion
+                add_base_to_figure(figure, "D", md_x0, md_x1, y0, y1)
+            elif md_type == "I":
+                # Insertion
+                add_line_to_base(figure, md_x0, md_x0, y0, y1)
+
+def get_read_position(read):
+    """
+    양 끝단 soft clip을 고려한 start,end를 얻는 함수
+    """
+    left_soft_len = 0
+    right_soft_len = 0
+    if read.cigar[0][0] == 4:
+        left_soft_len = read.cigar[0][1]
+    if read.cigar[-1][0] == 4:
+        right_soft_len = read.cigar[-1][1]
+    start = read.reference_start - left_soft_len
+    end = read.reference_end + right_soft_len
+    return start, end
+
+def get_row_index_brute_force(start:int, end:int, row_ends=[]) -> int:
+    if not row_ends:
+        row_ends.append(end)
+        return 0
+    for i, row_end in enumerate(row_ends):
+        # row별로 돌아가면서 start가 end보다 뒤면 해당 row로 지정하고, 해당 row_end를 현재 end로 바꾼다.
+        if start > row_end:
+            row_ends[i] = end
+            return i
+    else:
+        # 포함되는 row가 없다면 새로운 row를 추가한다.
+        row_ends.append(end)
+        return len(row_ends) - 1
+
+
+def direct_draw(reads, query_start, query_end):
+    fig = go.Figure()
+    for i, read in enumerate(reads):
+        start, end = get_read_position(read)
+        row_index = -get_row_index_brute_force(start, end)
+        add_read_to_figure(fig, start, end, row_index, read)
+    fig.update_layout(
+        xaxis_range=[query_start, query_end],
+        yaxis_range=[-20, 2],
+        template="plotly_white",
+        width=1000,
+    )
+    return fig
+
+
+def get_reads_from_bam(bam_file, chrom, start, end):
+    reads = []
+    with pysam.AlignmentFile(bam_file, "rb") as bam_open:
+        for read in bam_open.fetch(chrom, start, end):
+            if read.is_supplementary or read.is_secondary or read.mate_is_unmapped:
+                continue
+            reads.append(read)
+    return reads
+
+
+# bam_file = "https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/alignment/HG00096.chrom20.ILLUMINA.bwa.GBR.low_coverage.20120522.bam"
+bam_file = "../data/HG00096.chrom20.ILLUMINA.bwa.GBR.low_coverage.20120522.bam"
+
+query_chrom = "20"
+query_start = 31023417
+query_end = 31024716
+reads = get_reads_from_bam(bam_file, query_chrom, query_start, query_end)
+fig = direct_draw(reads, query_start, query_end)
+fig.show(renderer="png")
+```
+
+</details>
+
+**예시 이미지**
+
 ![](python_plotly_example.png)
+ 
 
-
-실제 IGV와 약간 다른점이 있을 수 있다. IGV에서 실제로 어떤 로직으로 read를 정렬하는지 모르기 때문이다. (IGV를 들여다보면 실제로 이해가 안되는 정렬이 있다.)
-
-또한, MD 태그에서 Mismatch 및 Deletion을 얻어야 하고 CIGAR 에서 Inserstion 정보를 얻어서 Reference와 다른부분을 표시해야 한다.
-
+- IGV에서 실제로 어떤 로직으로 read를 정렬하는지 모르기 때문에, 실제 IGV와 약간 다른점이 있을 수 있다. (IGV를 들여다보면 실제로 이해가 안되는 정렬이 있다.) 
+- 해당 코드에서 참고 할만한 것은 IGV와 유사한 정렬함수인 `get_row_index_brute_force` 함수가 있겠다. bisect를 응용하면 더 개선할 수 있을것 같다. 그림을 그릴 때 사용한 
+- plotly는 javascript기반이므로 이렇게 그리는 개체수가 많으면 매우 느리다. matplotlib으로 바꾸고 변이 정렬기능을 추가하면, 변이 시각화에 사용해도 되겠다.
 
 
 ## UI
 
 필요한 Object는 아래와 같다
-
+ - Query 입력란
  - Coverage Track
  - Alignment Track
     - Alignment
+ - RefSeq Track
 
 ### Alignment
 
-기능: Read의 특정 Base를 클릭하면 Read 및 Base 정보가 출력되야한다.
-표시: Read는 forward/reverse에 따라 색을 표현하고, Mismatch Base 및 Insersion, Deletion을 표현해야한다.
+**목표**: Read를 표시하고, Read의 특정 Base를 클릭하면 Read 및 Base 정보가 출력되야한다.
+
+**표시**: Read는 forward/reverse에 따라 색을 표현하고, Mismatch Base 및 Insersion, Deletion을 표현해야한다.
 
 Read Object에 대한 구성은 아래처럼 우선 진행한다.
 
